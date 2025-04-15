@@ -1,0 +1,191 @@
+* <2025-03-28 Fri> Primera reunión con el cliente
+
+** Se escogieron los roles de los integrantes del equipo
+
++-------------------+-------------------------+---------------------------+
+| Integrante        | email                   | Rol                       |
++-------------------+-------------------------+---------------------------+
+| Alberto Ferrada   | alferrada2021@udec.cl   | Product Owner / Developer |
+| Leonardo Lovera   | lelovera2021@udec.cl    | Scrum Master / Developer  |
+| Constanza Obreque | cobreque2020@udec.cl    | Developer                 |
+| Luciano Argomedo  | luargomedo2021@udec.cl  | Developer                 |
+| Tomás Contreras   | tocontreras2021@udec.cl | Developer                 |
++-------------------+-------------------------+---------------------------+
+
+** El cliente presentó sus necesidades
+
+- Solicita una plataforma de recomendaciones climáticas personalizadas
+- Prefiere tener una aplicación web
+- No es necesario usar AI
+- Busca contextualización climática de acuerdo a actividades a realizar
+- Quiere que se consideren las alergias, como cuando hay mucho polen
+- Por ejemplo, quiere saber si hace buen clima como para ir a la playa
+- O también, si es seguro trabajar al aire libre (exposición UV, calidad aire)
+- Obtener condiciones climáticas usando una API (OpenWeatherMap API)
+
+** También presentó una propuesta de solución
+
+1. El usuario indica sus actividades preferidas (senderismo, bicicleta...)
+2. La aplicación define umbrales de cada característica climática de acuerdo
+   a el tipo de actividad que el usuario desea realizar
+3. Según el clima, enviar notificaciones indicando si es apropiado, o no, hacer
+   alguna de las actividades ingresadas. Y si no, recomendaciones para ver qué
+   debería hacer para tener la mejor experiencia
+   3.1. La aplicación puede enviar tanto recomendaciones como alertas
+4. Indicó que en el futuro le gustaría sincronizarse con redes sociales
+
+*** Ideas adicionales para tener una mejor aplicación
+
+- Ver si el usuario tiene algún cronograma sobre qué días a la semana hace
+  las actividades que ingresa al sistema
+- El usuario debería ser capaz de modificar los umbrales por defecto de cada
+  característica climática y personalizarlas a su gusto
+- La aplicación debería solicitar la ubicación del usuario para tener
+  información personalizada
+- Sincronizar con el calendario para ver si el usuario tiene que, por ejemplo,
+  ir al aeropuerto o hacer algo que sea más o menos independiente del clima
+- Tomás sugirió un sistema de comentarios a los perfiles y el cliente se
+  mostró receptivo a la sugerencia
+
+** DONE Determinar visión del problema
+** DONE Determinar visión de la solucion
+** DONE Escribir historias de usuario
+** TODO Acotar problema y determinar requisitos funcionales y no funcionales
+** DONE Hacer w2m para fijar horario de reuniones daily, weekly
+
+Las Daily SCRUM Meetings serán todos los días hábiles a las 21:30.
+
+* <2025-04-04 Fri> Sprint 0: Visiones (problema, solución), User Stories
+
+** Visión del problema
+
+El clima puede intervenir/afectar en la planificación diaria de las personas.
+
+Actualmente, no existen plataformas que indiquen que el clima no es/será apto
+para realizar cierta actividad. Con esta información la planificación de hacer
+actividades al aire libre es simple y cómoda de hacer. Cada actividad tiene
+ciertas condiciones climáticas óptimas que favorecen al disfrute de esta. Y es
+esta personalización la que amerita la necesidad de tener disponibilidad de las
+condiciones ideales para cada actividad. Es por esto que se necesitan de
+sugerencias de actividades a realizar dependiendo de las condiciones climáticas
+del futuro cercano.
+
+** Visión de la solución
+
+Software que recomienda actividades a hacer de acuerdo al clima en el corto
+plazo. Estas recomendaciones son hechas de acuerdo a las preferencias del
+usuario.
+
+Este sistema puede incluir una agenda donde se indique qué actividad se busca
+hacer qué día y si es que el clima será apropiado para esto. Esta plataforma
+será web y tendrá un sistema de notificaciones que le indique las
+recomendaciones.
+
+*** Ideas propuestas
+
+1. Cano: la plataforma puede ser una extensión de una agenda
+2. Tomás: un software que conoce/predice el clima y entrega sugerencias
+
+*** DONE Especificar detalles de despliegue
+
+El sistema software será una plataforma web.
+
+** Product Backlog (User Stories)
+
+Como *rol*, quiero *hacer algo* para *objetivo*.
+
+*** MoSCoW
+
+Must
+Should
+Could
+Won't
+
+Los usuarios en general son personas que dependen del clima para realizar sus
+actividades. Estas pueden de ocio o profesionales.
+
+*** Usuario genérico
+
+Como /usuario/, quiero recibir recomendaciones de actividades basadas en el
+clima de una ubicación y de mis preferencias para planificar actividades
+durante la semana.
+
+Como /usuario/, quiero ingresar mis preferencias al sistema para que estas
+sean consideradas a la hora de notificar recomendaciones.
+
+Como /usuario/, quiero ingresar mi ubicación para poder recibir notificaciones
+del estado del clima en ella.
+
+*** Administradores de sistema
+
+Como /administrador de sistema/, quiero visualizar analíticas de uso de la
+aplicación para poder realizar actualizaciones pertinentes y mejorar su
+rendimiento.
+
+Como /estadista/, quiero conocer las actividades más realizadas por zonas para
+mejorar mi sistema de recomendación
+
+*** Maratonista
+
+Como /maratonista/ necesito saber con qué ropa debo salir a correr y si es
+que es adecuado que lo haga bajo las condiciones climáticas actuales.
+
+*** Mami cool
+
+Como /madre/, me gustaría agendar panoramas al aire libre con mi familia los
+fines de semana para poder sacar provecho de los días que tiene mi marido
+disponibles.
+
+*** Profesor
+
+Como /profesor/, necesito conocer las condiciones climáticas de la próxima
+semana para poder hacer un paseo de curso.
+
+*** Jefe de obras
+
+Como /jefe de obras/ necesito optimizar los recursos de mi empresa
+de construcción planificando un cronograma de actividades a realizar acorde al
+clima para poder organizar las obras.
+
+*** Dueño de food truck
+
+Como /dueño de food truck/, quiero saber cuándo hay más gente por el parque
+para poder instalar mi local.
+
+* <2025-04-14 Mon> Sprint 1
+
+Agregar Sprint y Product Backlog.
+
+** Ideas conversadas
+
+Alberto: diagrama inicial de la vista principal de la aplicación final.
+
+Coni: agregar recomendaciones de seguridad a las actividades que se planean
+hacer. E.g. "si vas a salir en bici, y está lloviendo, ten en cuenta que es
+mucho más difícil frenar."
+
+Coni: en la parte superior, se ven los días y se puede hacer click en cada
+uno. Ahí aparece el clima y una lista de las recomendaciones para cada
+actividad.
+
+** DONE Agregar visión del problema a Axosoft
+** DONE Agregar visión de la solución a Axosoft
+** DONE Agregar lo que se entregará al final del Sprint
+
+Al final del Sprint se tendrá de una versión preliminar de los componentes
+principales de la plataforma. Esto incluye una interfaz que muestre la
+información climática relevante, además de un sistema de recomendaciones
+básico de actividades a realizar. Esto se logrará usando datos estáticos
+del perfil del usuario (esto incluye las actividades preferidas), y de la
+ubicación. Se planea conectarse con el API del clima para extraer esta
+información en tiempo real.
+
+** DONE Agregar user stories a Axosoft
+** DONE Agregar tareas a realizar a Axosoft
+** DONE Agregar plazos de estas tareas
+** DONE Decidir framework web a usar
+
+Se usará Next.js con React para implementar la plataforma.
+El despliegue será con Vercel.
+
+** TODO Validar la visión de la solución y del sprint con Rojas
