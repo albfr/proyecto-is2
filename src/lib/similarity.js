@@ -1,7 +1,7 @@
 function norm(x) {
     let s = 0;
 
-    for (let value in x) {
+    for (let value of x) {
         s += value * value;
     }
 
