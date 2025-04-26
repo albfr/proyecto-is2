@@ -1,5 +1,6 @@
 import { getForecastFromCity, getForecastFromLatLon } from "@/lib/query/getForecast";
 // import { cosineSimilarity } from "@/lib/similarity";
+import getActivities from "@/lib/query/getActivities";
 
 export default async function handler(req, res) {
   try {
@@ -7,38 +8,36 @@ export default async function handler(req, res) {
     const lon = req.query.lon;
     const city = req.query.city;
     let forecast;
-    if (lat && lon) {
+    if (lat && lon)
       forecast = await getForecastFromLatLon(lat, lon);
-    }
-    else if (city) {
+    else if (city)
       forecast = await getForecastFromCity(city);
-    }
-    else {
-      throw NoLocationError;
-    }
-    forecast.forecast.forecastday.forEach(element => {
-      console.log(element.date)
-    });
-    forecast = forecast.forecast.forecastday;
-    // const activities = getActivities();
-    // const activities = [];
+    else
+      throw 1;
 
-    let data;
+    forecast = forecast.forecast.forecastday;
+    const activities = await getActivities();
+    if (!activities)
+      throw new Error("an error has occured in connection with databse");
+
+    let data = [];
     forecast.forEach(day => {
       let dayrecs = []
       activities.forEach(activity => {
-        // dayrecs.append(cosineSimilarity(day, activity));
+        // dayrecs.push(cosineSimilarity(day, activity));
+        dayrecs.push({"name": activity.name, "similarity": 2});
       });
-      // data.push(dayrecs);
+      console.log(dayrecs);
+      data.push({"day": day.date, "recommendations": dayrecs});
     });
+    console.log(data);
     res.status(200).json(data);
   }
   catch (err) {
     console.error(err);
-    if (err instanceof NoLocationError) {
+    if (err == 1)
       res.status(400).json({"error": "No city nor latitude/longitude provided"});
-      return;
-    }
-    res.status(500).json({"error": "An unexpected error occurred in server :/"});
+    else
+      res.status(500).json({"error": "An unexpected error occurred in server :/"});
   }
 };
