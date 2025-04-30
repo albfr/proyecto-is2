@@ -17,48 +17,49 @@ function norm(x) {
  * do one call of the getWeather* methods to not overload API calls...
  */
 export function cosineSimilarity(weather, activity) {
+    // Normalization values
+    const kelvin_shift = 273.15;
+    const max_temp = 333;
+    const max_wind = 400; 
+    const ave_pressure = 1013.25;
+    const max_humidity = 100; 
+    const max_cloud = 100;
+    const max_vis = 4.83;
+    const max_uv = 10;
+
+    // Importance weights
+    // TODO: define
+
     // Current values
-    const temp = weather.current.temp_c;
-    const is_day = weather.current.is_day;
-    const wind = weather.current.wind_kph;
-    const pressure = weather.current.pressure_mb;
-    const precip = weather.current.precip_mm;
-    const humidity = weather.current.humidity;
-    const cloud = weather.current.cloud;
-    const vis = weather.current.vis_km;
-    const uv = weather.current.uv;
+    const temp = (weather.avgtemp_c + kelvin_shift) / max_temp;
+    const wind = weather.maxwind_kph / max_wind;
+    const precip = weather.totalprecip_mm;
+    const humidity = weather.avghumidity / max_humidity;
+    const vis = weather.avgvis_km / max_vis;
+    const uv = weather.uv / max_uv;
 
     const curr = [
         temp,
-        is_day,
         wind,
-        pressure,
         precip,
         humidity,
-        cloud,
         vis,
         uv
     ];
 
     // Preferences
-    const pref_temp = activity.temp_c;
-    const pref_is_day = activity.is_day;
-    const pref_wind = activity.wind_kph;
-    const pref_pressure = activity.pressure_mb;
+    const pref_temp = (activity.temp_c + kelvin_shift) / max_temp;
+    const pref_wind = activity.wind_kph / max_wind;
     const pref_precip = activity.precip_mm;
-    const pref_humidity = activity.humidity;
-    const pref_cloud = activity.cloud;
-    const pref_vis = activity.vis_km;
-    const pref_uv = activity.uv;
+    const pref_humidity = activity.humidity / max_humidity;
+    const pref_vis = activity.vis_km / max_vis;
+    const pref_uv = activity.uv / max_uv;
 
     const pref = [
         pref_temp,
-        pref_is_day,
         pref_wind,
-        pref_pressure,
         pref_precip,
         pref_humidity,
-        pref_cloud,
         pref_vis,
         pref_uv
     ];
@@ -70,7 +71,7 @@ export function cosineSimilarity(weather, activity) {
     // Compute dot product
     let p = 0;
 
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 6; i++) {
         p += curr[i] * pref[i];
     }
 
