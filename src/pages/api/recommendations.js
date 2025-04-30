@@ -1,5 +1,5 @@
 import { getForecastFromCity, getForecastFromLatLon } from "@/lib/query/getForecast";
-// import { cosineSimilarity } from "@/lib/similarity";
+ import { cosineSimilarity } from "@/lib/similarity";
 import getActivities from "@/lib/query/getActivities";
 
 export default async function handler(req, res) {
@@ -24,8 +24,7 @@ export default async function handler(req, res) {
     forecast.forEach(day => {
       let dayrecs = []
       activities.forEach(activity => {
-        // dayrecs.push(cosineSimilarity(day, activity));
-        dayrecs.push({"name": activity.name, "similarity": 2});
+        dayrecs.push({"name": activity.name, "similarity": cosineSimilarity(day.day, activity)});
       });
       console.log(dayrecs);
       data.push({"day": day.date, "recommendations": dayrecs});
