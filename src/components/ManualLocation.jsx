@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function ManualLocation() {
   const [ubicacion, setUbicacion] = useState('');
   const [resultado, setResultado] = useState(null);
+  const [recomendaciones, setRecomendaciones] = useState(null);
   const [error, setError] = useState('');
 
   const buscarUbicacion = async () => {
@@ -13,18 +14,30 @@ function ManualLocation() {
       const data = await response.json();
       if (data.length > 0) {
         const lugar = data[0];
+        const lat = lugar.lat;
+        const lon = lugar.lon;
+
         setResultado({
           nombre: lugar.display_name,
-          lat: lugar.lat,
-          lon: lugar.lon,
+          lat,
+          lon,
         });
+
         setError('');
+
+        // 📡 Aquí se llama al handler backend
+        const res = await fetch(`/api/recommendations?lat=${lat}&lon=${lon}`);
+        const recomendacionesData = await res.json();
+
+        setRecomendaciones(recomendacionesData);
       } else {
         setResultado(null);
         setError('No se encontró la ciudad');
+        setRecomendaciones(null);
       }
     } catch (err) {
-      setError('Error al buscar la ciudad');
+      setError('Error al buscar la ciudad o las recomendaciones');
+      setRecomendaciones(null);
     }
   };
 
@@ -35,7 +48,8 @@ function ManualLocation() {
   };
 
   return (
-      <div style={{ display: 'flex', marginTop: '1rem', alignItems: 'center' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <button
           onClick={buscarUbicacion}
           style={{
@@ -62,6 +76,31 @@ function ManualLocation() {
           }}
         />
       </div>
+
+      {resultado && (
+        <p style={{ marginTop: '1rem' }}>📍 {resultado.nombre}</p>
+      )}
+
+      {recomendaciones && (
+        <div style={{ marginTop: '1rem' }}>
+          <h3>Recomendaciones por día:</h3>
+          {recomendaciones.map((dia, i) => (
+            <div key={i} style={{ marginBottom: '1rem' }}>
+              <strong>{dia.day}</strong>
+              <ul>
+                {dia.recommendations.map((rec, j) => (
+                  <li key={j}>{rec.name} — Similitud: {rec.similarity.toFixed(2)}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {error && (
+        <p style={{ color: 'red', marginTop: '1rem' }}>{error}</p>
+      )}
+    </div>
   );
 }
 
