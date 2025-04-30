@@ -7,15 +7,14 @@ import ActivityRecommendation from './activityRecommendation';
 import RecommendationPagination from './paginationRecommendation';
 
 import weatherPic from '../assets/sun.png';
-import '../styles/dailyRecommendationStyle.module.css';
 
-function DailyRecommendation() {
+function DailyRecommendation( weekDay ) {
   const [currentRecommendationPage, setCurrentRecommendationPage] = useState(1);
   const totalRecommendationPages = 5;   //<--- This should be dynamic through uhh fetching? Just using five as an example lolol
 
-  //Example!!! Fetch or define weather data!!!
+  //Example!!! Fetch weather data!!!
   const [weatherData, setWeatherData] = useState({
-    day: 'Lunes',
+    day: {weekDay},
     date: '24/06/2024',
     maxTemp: 30,
     minTemp: 18,
@@ -30,7 +29,6 @@ function DailyRecommendation() {
     imageAlt: 'Sol brillante'
   });
 
-  //Handlers
   const handlePageChange = (pageNumber) => {
     setCurrentRecommendationPage(pageNumber);
      setWeatherData(prevData => ({
