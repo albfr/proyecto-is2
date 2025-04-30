@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DailyRecommendation from "./dailyRecommendation";
 import WeekdaySelector from './weekDaySelector';
 
-import '../assets/DRStyle.css';
+import '../styles/styles.css';
 
 function WeeklyRecommendations(){
     const [currentDay, setCurrentDay] = useState('Lunes')
