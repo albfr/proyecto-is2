@@ -7,7 +7,7 @@ import ActivityRecommendation from './activityRecommendation';
 import RecommendationPagination from './paginationRecommendation';
 
 import weatherPic from '../assets/sun.png';
-import '../assets/DRStyle.css';
+import '../styles/dailyRecommendationStyle.module.css';
 
 function DailyRecommendation() {
   const [currentRecommendationPage, setCurrentRecommendationPage] = useState(1);
