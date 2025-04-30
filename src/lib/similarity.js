@@ -48,11 +48,11 @@ export function cosineSimilarity(weather, activity) {
     ];
 
     // Preferences
-    const pref_temp = (activity.temp_c + kelvin_shift) / max_temp;
-    const pref_wind = activity.wind_kph / max_wind;
-    const pref_precip = activity.precip_mm;
+    const pref_temp = (activity.temperature + kelvin_shift) / max_temp;
+    const pref_wind = activity.wind / max_wind;
+    const pref_precip = activity.precipitation;
     const pref_humidity = activity.humidity / max_humidity;
-    const pref_vis = activity.vis_km / max_vis;
+    const pref_vis = activity.visibility / max_vis;
     const pref_uv = activity.uv / max_uv;
 
     const pref = [
