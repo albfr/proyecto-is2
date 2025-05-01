@@ -4,7 +4,6 @@ function ManualLocation() {
   const [ubicacion, setUbicacion] = useState('');
   const [resultado, setResultado] = useState(null);
   const [recomendaciones, setRecomendaciones] = useState(null);
-  const [error, setError] = useState('');
 
   const buscarUbicacion = async () => {
     try {
@@ -23,20 +22,15 @@ function ManualLocation() {
           lon,
         });
 
-        setError('');
-
-        // 📡 Aquí se llama al handler backend
         const res = await fetch(`/api/recommendations?lat=${lat}&lon=${lon}`);
         const recomendacionesData = await res.json();
 
         setRecomendaciones(recomendacionesData);
       } else {
         setResultado(null);
-        setError('No se encontró la ciudad');
         setRecomendaciones(null);
       }
-    } catch (err) {
-      setError('Error al buscar la ciudad o las recomendaciones');
+    } catch {
       setRecomendaciones(null);
     }
   };
@@ -77,10 +71,6 @@ function ManualLocation() {
         />
       </div>
 
-      {resultado && (
-        <p style={{ marginTop: '1rem' }}>📍 {resultado.nombre}</p>
-      )}
-
       {recomendaciones && (
         <div style={{ marginTop: '1rem' }}>
           <h3>Recomendaciones por día:</h3>
@@ -95,10 +85,6 @@ function ManualLocation() {
             </div>
           ))}
         </div>
-      )}
-
-      {error && (
-        <p style={{ color: 'red', marginTop: '1rem' }}>{error}</p>
       )}
     </div>
   );
