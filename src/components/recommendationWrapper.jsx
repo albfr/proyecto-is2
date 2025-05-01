@@ -5,7 +5,9 @@ import WeeklyRecommendations from './weeklyRecommendations';
 function recommendationWrapper() {
   return (
     <div style={{ padding: '2rem' }}>
-      <ManualLocation />
+      <div style={{ marginBottom: '2rem' }}>
+        <ManualLocation />
+      </div>
       <WeeklyRecommendations />
     </div>
   );
