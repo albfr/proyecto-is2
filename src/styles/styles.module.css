@@ -1,0 +1,212 @@
+.dailyRecWrapper {
+  font-family: sans-serif;
+  background-image: linear-gradient(#e2e2e2f5, #d0d0d0e4);
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+  column-gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    "col1 col2";
+  width: 80%;
+  height: auto;
+  align-items: flex-start;
+}
+
+.info-column {
+  grid-area: col1;
+  display: grid;
+  align-items: center;
+  grid-template-areas:
+    "image data"
+    "healthcare healthcare";
+}
+
+.dailyRecWrapper .weather-image {
+  grid-area: image;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 50%;
+  height: auto;
+  border-radius: 25%;
+  filter: drop-shadow(5px 5px 10px #555);
+}
+
+.dailyRecWrapper .data-grid {
+  grid-area: data;
+  grid-template-areas:
+    "row1"
+    "row2";
+}
+
+.dailyRecWrapper .day-date-temp-hum {
+  grid-area: row1;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.dailyRecWrapper .double-row-display {
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
+.dailyRecWrapper .double-col-display {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.weather-info {
+  grid-area: row2;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  grid-gap: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.grid-item {
+  padding: 5px;
+  text-align: left;
+}
+
+.healthcare {
+  grid-area: healthcare;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: #FAF2F3;
+  word-wrap: break-word;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.recommendation-column {
+  grid-area: col2;
+  display: grid;
+  grid-template-areas:
+    "title"
+    "recommendation"
+    "radio-buttons";
+}
+
+.recommendation-title{
+  grid-area: title;
+  background-color: #FAF2F3;
+  border-radius: 10px;
+  word-wrap: break-word;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.recommendation-rect {
+  grid-area: recommendation;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  background-color: #FAF2F3;
+  word-wrap: break-word;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.recommendation-buttons {
+  grid-area: radio-buttons;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.radio-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recommendation-buttons > div { /* Target the *divs* directly */
+  position: relative;
+  margin: 0 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+ }
+
+.recommendation-buttons input {
+  position: relative;
+  margin: -35px;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+}
+
+.recommendation-buttons .radio-tile{
+  background-color: #555;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  transition: all  400ms ease-in-out;
+}
+
+input:checked + .radio-tile {
+  background-color: #FAF2F3;
+  box-shadow: 0 0 12px #FAF2F3;
+  height: 44px;
+  width: 44px;
+}
+
+.weekly-wrapper {
+  justify-content: center;
+}
+
+.weekday-selector {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 10px;
+  background-image: linear-gradient(#e2e2e2f5, #d0d0d0e4);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  height: auto;
+  width: 80%;
+  justify-content: center;
+}
+
+.day-button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #aeaeae;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  min-width: 50px;
+  text-align: center;
+}
+
+.day-button:hover {
+  background-color: #dddddd;
+  border-color: #bbb;
+}
+
+.day-button.selected {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+  font-weight: bold;
+}
+
+.day-button.selected:hover {
+   background-color: #0056b3;
+}
