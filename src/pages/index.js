@@ -1,6 +1,5 @@
 import Head from "next/head";
-import { Geist, Geist_Mono } from "next/font/google";
-import styles from "@/styles/styles.module.css";
+//import { Geist, Geist_Mono } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import RecommendationWrapper from "@/components/RecommendationWrapper";
 

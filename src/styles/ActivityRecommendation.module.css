@@ -1,0 +1,10 @@
+.recommendation-rect {
+    grid-area: recommendation;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background-color: #FAF2F3;
+    word-wrap: break-word;
+    overflow: hidden;
+    padding: 10px;
+}

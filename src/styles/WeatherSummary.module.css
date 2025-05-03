@@ -1,0 +1,22 @@
+.dailyRecWrapper .day-date-temp-hum {
+    grid-area: row1;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.dailyRecWrapper .double-row-display {
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.dailyRecWrapper .double-col-display {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.grid-item {
+    padding: 5px;
+    text-align: left;
+}

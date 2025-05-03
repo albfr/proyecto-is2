@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from '@/styles/WeatherImage.module.css'
 
 function WeatherImage({ src, alt }) {   //Receives image source and alt text.
   return (
-    <img className="weather-image" src={src} alt={alt} />
+    <img className={styles.weather_image} src={src} alt={alt} />
   );
 }
 

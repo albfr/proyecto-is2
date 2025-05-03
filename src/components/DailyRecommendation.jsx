@@ -6,7 +6,7 @@ import HealthCareTips from './HealthcareTips';
 import ActivityRecommendation from './ActivityRecommendation';
 import RecommendationPagination from './PaginationRecommendation';
 
-// import weatherPic from '../assets/sun.png';
+import styles from '@/styles/DailyRecommendation.module.css';
 
 function DailyRecommendation( weekDay ) {
   const [currentRecommendationPage, setCurrentRecommendationPage] = useState(1);
@@ -38,7 +38,7 @@ function DailyRecommendation( weekDay ) {
   };
 
   return (
-    <div className="dailyRecWrapper">
+    <div className={styles.dailyRecWrapper}>
       <div className="info-column">
         <WeatherImage src={weatherData.imageSrc} alt={weatherData.imageAlt} />
         <div className="data-grid">

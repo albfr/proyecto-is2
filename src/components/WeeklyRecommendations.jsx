@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DailyRecommendation from "./DailyRecommendation";
 import WeekdaySelector from './WeekDaySelector';
 
-import '../styles/styles.module.css';
+import styles from '@/styles/WeeklyRecommendation.module.css';
 
 function WeeklyRecommendations(){
     const [currentDay, setCurrentDay] = useState('Lunes')
@@ -11,7 +11,7 @@ function WeeklyRecommendations(){
         setCurrentDay(newDay);
       };
     return (
-        <div className="weeklyWrapper">
+        <div className={styles.weekly_wrapper}>
             <WeekdaySelector selectedDay={currentDay} onDayChange={handleDayChange} />
             <p>
                 Selected Day: <strong>{currentDay || 'None'}</strong>
