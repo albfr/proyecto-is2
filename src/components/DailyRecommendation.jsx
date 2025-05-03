@@ -39,9 +39,9 @@ function DailyRecommendation( weekDay ) {
 
   return (
     <div className={styles.dailyRecWrapper}>
-      <div className="info-column">
+      <div className={styles.info_column}>
         <WeatherImage src={weatherData.imageSrc} alt={weatherData.imageAlt} />
-        <div className="data-grid">
+        <div className={styles.data_grid}>
           <WeatherSummary
             day={weatherData.day}
             date={weatherData.date}
@@ -59,8 +59,8 @@ function DailyRecommendation( weekDay ) {
         <HealthCareTips tips={weatherData.healthTips} />
       </div>
 
-      <div className="recommendation-column">
-        <h1 className="recommendation-title">Actividades Recomendadas</h1>
+      <div className={styles.recommendation_column}>
+        <h1 className={styles.recommendation_title}>Actividades Recomendadas</h1>
         <ActivityRecommendation text={weatherData.activityText} />
         <RecommendationPagination
           totalPages={totalRecommendationPages}

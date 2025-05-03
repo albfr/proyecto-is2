@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "@/styles/ActivityRecommendation.module.css";
+import styles from '@/styles/ActivityRecommendation.module.css'
 
 function ActivityRecommendation({ text }) {     //Receives recommendation text.
   return (

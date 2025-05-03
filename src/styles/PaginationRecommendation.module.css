@@ -1,4 +1,4 @@
-.recommendation-buttons {
+.recommendation_buttons {
     grid-area: radio-buttons;
     display: flex;
     justify-content: center;
@@ -6,7 +6,7 @@
     margin-top: 50px;
 }
 
-.recommendation-buttons > div {
+.recommendation_buttons > div {
     position: relative;
     margin: 0 40px;
     display: flex;
@@ -16,7 +16,7 @@
     height: 40px;
 }
   
-.recommendation-buttons input {
+.recommendation_buttons input {
     position: relative;
     margin: -35px;
     height: 40px;

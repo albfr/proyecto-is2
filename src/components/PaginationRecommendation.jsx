@@ -1,5 +1,6 @@
 import React from 'react';
 import PaginationDot from './PaginationDot';
+import styles from '@/styles/PaginationRecommendation.module.css'
 
 function RecommendationPagination({ totalPages, currentPage, 
                                     onPageChange, name = "rec_page" }) {    //Receives total number of pages, current page, 
@@ -19,7 +20,7 @@ function RecommendationPagination({ totalPages, currentPage,
   }
 
   return (
-    <div className="recommendation-buttons">
+    <div className={styles.recommendation_buttons}>
       {dots}
     </div>
   );

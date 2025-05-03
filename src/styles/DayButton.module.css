@@ -1,4 +1,4 @@
-.day-button {
+.day_button {
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -10,18 +10,18 @@
     text-align: center;
 }
   
-.day-button:hover {
+.day_button:hover {
     background-color: #dddddd;
     border-color: #bbb;
 }
   
-.day-button.selected {
+.day_button.selected {
     background-color: #007bff;
     color: white;
     border-color: #0056b3;
     font-weight: bold;
 }
   
-.day-button.selected:hover {
+.day_button.selected:hover {
      background-color: #0056b3;
 }
