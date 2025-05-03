@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import WeatherImage from './weatherImage';
-import WeatherSummary from './weatherSummary';
-import WeatherDetails from './weatherDetails';
-import HealthCareTips from './healthcareTips';
-import ActivityRecommendation from './activityRecommendation';
-import RecommendationPagination from './paginationRecommendation';
+import WeatherImage from './WeatherImage';
+import WeatherSummary from './WeatherSummary';
+import WeatherDetails from './WeatherDetails';
+import HealthCareTips from './HealthcareTips';
+import ActivityRecommendation from './ActivityRecommendation';
+import RecommendationPagination from './PaginationRecommendation';
 
-import weatherPic from '../assets/sun.png';
+// import weatherPic from '../assets/sun.png';
 
 function DailyRecommendation( weekDay ) {
   const [currentRecommendationPage, setCurrentRecommendationPage] = useState(1);
@@ -14,7 +14,7 @@ function DailyRecommendation( weekDay ) {
 
   //Example!!! Fetch weather data!!!
   const [weatherData, setWeatherData] = useState({
-    day: {weekDay},
+    day: weekDay,
     date: '24/06/2024',
     maxTemp: 30,
     minTemp: 18,
@@ -25,7 +25,7 @@ function DailyRecommendation( weekDay ) {
     windSpeed: 15,
     healthTips: 'Mantente hidratado y usa protector solar',
     activityText: `Página ${currentRecommendationPage}: Correr es una buena idea :D.`,
-    imageSrc: weatherPic,
+    imageSrc: "./sun.png",
     imageAlt: 'Sol brillante'
   });
 

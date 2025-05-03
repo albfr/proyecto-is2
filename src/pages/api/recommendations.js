@@ -26,7 +26,6 @@ export default async function handler(req, res) {
       activities.forEach(activity => {
         dayrecs.push({"name": activity.name, "similarity": cosineSimilarity(day.day, activity)});
       });
-      // console.log(dayrecs);
       data.push({"day": day.date, "recommendations": dayrecs});
     });
     res.status(200).json(data);

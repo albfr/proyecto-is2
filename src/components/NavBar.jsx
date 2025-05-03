@@ -1,7 +1,7 @@
 import React from 'react';
-import AutomaticLocation from './automaticLocation';
-import BarLogo from '../assets/logo.png';
-import User from '../assets/.png';
+import AutomaticLocation from './AutomaticLocation';
+// import BarLogo from '../assets/logo.png';
+// import User from '../assets/usuario.png';
 
 
 
@@ -24,7 +24,7 @@ function NavBar() {
       </div>
 
       <div style={{ flex: 1, textAlign: 'center' }}>
-        <img src={BarLogo}  style={{ height: '40px' }} />
+        <img src="./logo.png"  style={{ height: '40px' }} />
       </div>
 
       <div style={{ flex: 1, textAlign: 'right' }}>
@@ -34,7 +34,7 @@ function NavBar() {
           cursor: 'pointer',
         }}>
           <img
-            src={User}
+            src="/usuario.png"
             style={{ height: '40px', width: '40px', borderRadius: '50%' }}
           />
         </button>

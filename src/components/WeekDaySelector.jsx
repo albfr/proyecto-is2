@@ -1,5 +1,5 @@
 import React from 'react';
-import DayButton from './dayButton';
+import DayButton from './DayButton';
 
 const DAYS_OF_WEEK = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 function WeekdaySelector({ selectedDay, onDayChange }) {

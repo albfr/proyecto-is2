@@ -1,5 +1,5 @@
 import React from 'react';
-import PaginationDot from './paginationDot';
+import PaginationDot from './PaginationDot';
 
 function RecommendationPagination({ totalPages, currentPage, 
                                     onPageChange, name = "rec_page" }) {    //Receives total number of pages, current page, 

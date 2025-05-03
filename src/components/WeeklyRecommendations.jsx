@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import DailyRecommendation from "./dailyRecommendation";
-import WeekdaySelector from './weekDaySelector';
+import DailyRecommendation from "./DailyRecommendation";
+import WeekdaySelector from './WeekDaySelector';
 
-import '../styles/styles.css';
+import '../styles/styles.module.css';
 
 function WeeklyRecommendations(){
     const [currentDay, setCurrentDay] = useState('Lunes')
     
     const handleDayChange = (newDay) => {
-        console.log("Selected day:", newDay);
         setCurrentDay(newDay);
       };
-
     return (
         <div className="weeklyWrapper">
             <WeekdaySelector selectedDay={currentDay} onDayChange={handleDayChange} />
