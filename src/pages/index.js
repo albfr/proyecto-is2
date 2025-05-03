@@ -2,6 +2,7 @@ import Head from "next/head";
 //import { Geist, Geist_Mono } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import RecommendationWrapper from "@/components/RecommendationWrapper";
+import styles from "@/styles/Index.module.css";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -25,11 +26,13 @@ export default function Home() {
       {/* <div
         className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
       > */}
-      <NavBar></NavBar>
-      {/* <main className={styles.main}> */}
-      <div styles="1px solid red">
-        <RecommendationWrapper></RecommendationWrapper>
+      <div className={styles.screenWrapper}>
+        <NavBar></NavBar>
+        {/* <main className={styles.main}> */}
+        <div styles="1px solid red">
+          <RecommendationWrapper></RecommendationWrapper>
         </div>
+      </div>
       {/* </main> */}
       {/* <footer className={styles.footer}>
       </footer> */}

@@ -34,7 +34,7 @@ function AutomaticLocation() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Comic Sans MS, cursive', maxWidth: '500px', margin: 'auto' }}>
-      <button onClick={obtenerUbicacion} style={{ marginTop: '1rem', padding: '1rem', fontSize: '1rem' }}>
+      <button onClick={obtenerUbicacion} style={{ padding: '0.5rem', fontSize: '1rem' }}>
         {ciudad}
       </button>
     </div>

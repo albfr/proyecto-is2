@@ -12,10 +12,10 @@ function WeeklyRecommendations(){
       };
     return (
         <div className={styles.weekly_wrapper}>
-            <WeekdaySelector selectedDay={currentDay} onDayChange={handleDayChange} />
             <p>
                 Selected Day: <strong>{currentDay || 'None'}</strong>
             </p>
+            <WeekdaySelector selectedDay={currentDay} onDayChange={handleDayChange} />
             <DailyRecommendation weekDay={currentDay}/>
         </div>
     )
