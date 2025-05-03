@@ -2,9 +2,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 50px
 }
 
-.recommendation_buttons .radio_tile{
+.radio_tile{
     background-color: #555;
     border-radius: 50%;
     height: 30px;

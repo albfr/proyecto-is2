@@ -1,4 +1,4 @@
-.dailyRecWrapper .weather_image {
+.weather_image {
     grid-area: image;
     display: block;
     margin-left: auto;

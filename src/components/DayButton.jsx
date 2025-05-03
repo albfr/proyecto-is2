@@ -1,11 +1,14 @@
 import React from 'react';
-import '@/styles/DayButton.module.css'
+import styles from '@/styles/DayButton.module.css';
 
 function DayButton({ day, isSelected, onClick }) {
-  const buttonClassName = `day_button ${isSelected ? 'selected' : ''}`;
+  const buttonClassName = `${styles.day_button} ${isSelected ? styles.selected : ''}`;
   return (
     <button
-      type="button" className={buttonClassName} onClick={() => onClick(day)}>
+      type="button"
+      className={buttonClassName}
+      onClick={() => onClick(day)}
+    >
       {day}
     </button>
   );

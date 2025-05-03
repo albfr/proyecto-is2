@@ -1,30 +1,27 @@
 import React from 'react';
 import AutomaticLocation from './AutomaticLocation';
-// import BarLogo from '../assets/logo.png';
-// import User from '../assets/usuario.png';
-
-
 
 function NavBar() {
   return (
     <div style={{
       display: 'flex',
-      justifyContent: 'space-between',
       alignItems: 'center',
+      justifyContent: 'space-between',
       backgroundColor: '#f5f5f5',
-      padding: '1rem 2rem',
+      padding: '0 2rem',
       borderBottom: '1px solid #ccc',
       position: 'sticky',
       top: 0,
-      width: '100%',
+      width: '94.3vw',
       zIndex: 1000,
+      height: '70px',
     }}>
       <div style={{ flex: 1 }}>
         <AutomaticLocation />
       </div>
 
       <div style={{ flex: 1, textAlign: 'center' }}>
-        <img src="./logo.png"  style={{ height: '40px' }} />
+        <img src="./logo.png" alt="Logo" style={{ height: '50px', objectFit: 'contain' }} />
       </div>
 
       <div style={{ flex: 1, textAlign: 'right' }}>
@@ -32,10 +29,12 @@ function NavBar() {
           background: 'none',
           border: 'none',
           cursor: 'pointer',
+          padding: 0,
         }}>
           <img
             src="/usuario.png"
-            style={{ height: '40px', width: '40px', borderRadius: '50%' }}
+            alt="User"
+            style={{ height: '40px', width: '40px', borderRadius: '50%', objectFit: 'cover' }}
           />
         </button>
       </div>

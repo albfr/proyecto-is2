@@ -1,17 +1,18 @@
-.dailyRecWrapper .day_date_temp_hum {
+.day_date_temp_hum {
     grid-area: row1;
     display: grid;
     grid-template-columns: auto auto auto;
     margin-top: 10px;
     margin-bottom: 10px;
+    align-items: center;
 }
 
-.dailyRecWrapper .double_row_display {
+.double_row_display {
     display: grid;
     grid-template-rows: auto auto;
 }
 
-.dailyRecWrapper .double_col_display {
+.double_col_display {
     display: grid;
     grid-template-columns: auto auto;
 }
