@@ -13,30 +13,37 @@ function ManualLocation() {
         if (update) {
             fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(ubicacion)}`)
             .then((response) => {
-                const data = response.json();
-                if (data.length > 0) {
-                    const lugar = data[0];
-                    const lat = lugar.lat;
-                    const lon = lugar.lon;
-                    fetch(`/api/recommendations?lat=${lat}&lon=${lon}`)
-                    .then((res) => {
-                        recomendacionesData = res.json();
-                        setRecomendaciones(recomendacionesData);
-                        setResultado({
-                            nombre: lugar.display_name,
-                            lat,
-                            lon
+                response.json().then((d) => {
+                    const data = d;
+                    if (data.length > 0) {
+                        const lugar = data[0];
+                        const lat = lugar.lat;
+                        const lon = lugar.lon;
+                        fetch(`/api/recommendations?lat=${lat}&lon=${lon}`)
+                        .then((res) => {
+                            // recomendacionesData = res.json();
+                            res.json()
+                            .then((algo) => {
+                                recomendacionesData = algo;
+                                console.log(recomendacionesData);
+                                setRecomendaciones(recomendacionesData);
+                                setResultado({
+                                    nombre: lugar.display_name,
+                                    lat,
+                                    lon
+                                });
+                            });
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                            setRecomendaciones(null);
+                            setResultado(null);
                         });
-                    })
-                    .catch((err) => {
-                        console.error(err);
-                        setRecomendaciones(null);
+                    } else {
                         setResultado(null);
-                    });
-                } else {
-                    setResultado(null);
-                    setRecomendaciones(null);
-                }
+                        setRecomendaciones(null);
+                    }
+                });
             })
         }
     }, [update, ubicacion]);
