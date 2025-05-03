@@ -1,9 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import WeeklyRecommendations from './WeeklyRecommendations';
 
 function ManualLocation() {
   const [ubicacion, setUbicacion] = useState('');
   const [resultado, setResultado] = useState(null);
   const [recomendaciones, setRecomendaciones] = useState(null);
+
+  let recomendacionesData;
+
+  useEffect(() => {
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(ubicacion)}`)
+    .then((response) => {
+      const lugar = data[0];
+      const lat = lugar.lat;
+      const lon = lugar.lon;
+      fetch(`/api/recommendations?lat=${lat}&lon=${lon}`)
+      .then((res) => {
+        recomendacionesData = res.json();
+        setRecomendaciones(recomendacionesData);
+        setResultado({
+          nombre: lugar.display_name,
+          lat,
+          lon
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        setRecomendaciones(null);
+        setResultado(null);
+      });
+    })
+    recomendacionesData
+  }, [ubicacion]);
 
   const buscarUbicacion = async () => {
     try {
@@ -23,7 +51,8 @@ function ManualLocation() {
         });
 
         const res = await fetch(`/api/recommendations?lat=${lat}&lon=${lon}`);
-        const recomendacionesData = await res.json();
+        recomendacionesData = await res.json();
+        console.log(recomendacionesData);
 
         setRecomendaciones(recomendacionesData);
       } else {
@@ -86,6 +115,7 @@ function ManualLocation() {
           ))}
         </div>
       )}
+    <WeeklyRecommendations recs={recomendacionesData}></WeeklyRecommendations>
     </div>
   );
 }

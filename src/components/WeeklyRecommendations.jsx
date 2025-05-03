@@ -4,12 +4,12 @@ import WeekdaySelector from './WeekDaySelector';
 
 import styles from '@/styles/WeeklyRecommendation.module.css';
 
-function WeeklyRecommendations(){
+function WeeklyRecommendations(recs){
     const [currentDay, setCurrentDay] = useState('Lunes')
     
     const handleDayChange = (newDay) => {
         setCurrentDay(newDay);
-      };
+    };
     return (
         <div className={styles.weekly_wrapper}>
             <WeekdaySelector selectedDay={currentDay} onDayChange={handleDayChange} />
