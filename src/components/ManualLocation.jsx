@@ -25,7 +25,7 @@ function ManualLocation() {
                             res.json()
                             .then((algo) => {
                                 recomendacionesData = algo;
-                                console.log(recomendacionesData);
+                                // console.log(recomendacionesData);
                                 setRecomendaciones(recomendacionesData);
                                 setResultado({
                                     nombre: lugar.display_name,
@@ -54,8 +54,11 @@ function ManualLocation() {
         }
     };
 
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem' }}>
+
+    // return (
+    let k = (
+        // <div style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem' }}>
+        <>
         <div style={{ display: 'flex', alignItems: 'center' }}>
         <button
         onClick={() => setUpdate(true)}
@@ -87,24 +90,32 @@ function ManualLocation() {
         />
         </div>
 
-        {recomendaciones && (
-            <div style={{ marginTop: '1rem' }}>
-            <h3>Recomendaciones por día:</h3>
-            {recomendaciones.map((dia, i) => (
-                <div key={i} style={{ marginBottom: '1rem' }}>
-                <strong>{dia.day}</strong>
-                <ul>
-                {dia.recommendations.map((rec, j) => (
-                    <li key={j}>{rec.name} — Similitud: {rec.similarity.toFixed(2)}</li>
-                ))}
-                </ul>
-                </div>
-            ))}
-            </div>
-        )}
-        <WeeklyRecommendations recs={recomendacionesData}></WeeklyRecommendations>
-        </div>
+        </>
     );
+    if (recomendaciones) {
+        console.log(recomendaciones);
+        console.log(recomendacionesData);
+        return (
+            <>
+                {k}
+                {/* <div style={{ marginTop: '1rem' }}>
+                <h3>Recomendaciones por día:</h3>
+                {recomendaciones.map((dia, i) => (
+                    <div key={i} style={{ marginBottom: '1rem' }}>
+                    <strong>{dia.day}</strong>
+                    <ul>
+                    {dia.recommendations.map((rec, j) => (
+                        <li key={j}>{rec.name} — Similitud: {rec.similarity.toFixed(2)}</li>
+                    ))}
+                    </ul>
+                    </div>
+                ))}
+                </div> */}
+                <WeeklyRecommendations recs={recomendaciones}></WeeklyRecommendations>
+            </>
+        )
+    }
+    return k;
 }
 
 export default ManualLocation;

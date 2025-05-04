@@ -8,11 +8,13 @@ import RecommendationPagination from './PaginationRecommendation';
 
 import styles from '@/styles/DailyRecommendation.module.css';
 
-function DailyRecommendation( weekDay ) {
+function DailyRecommendation( {weekDay, recs} ) {
   const [currentRecommendationPage, setCurrentRecommendationPage] = useState(1);
-  const totalRecommendationPages = 5;   //<--- This should be dynamic through uhh fetching? Just using five as an example lolol
+  const totalRecommendationPages = recs.recommendations.length;   //<--- This should be dynamic through uhh fetching? Just using five as an example lolol
 
   //Example!!! Fetch weather data!!!
+  console.log(weekDay, recs);
+  // const weatherData = {
   const [weatherData, setWeatherData] = useState({
     day: weekDay,
     date: '24/06/2024',
@@ -28,14 +30,19 @@ function DailyRecommendation( weekDay ) {
     imageSrc: "./sun.png",
     imageAlt: 'Sol brillante'
   });
+  // const weatherData = recs;
+  console.log("weatherData", weatherData);
+  console.log("hola", recs);
 
   const handlePageChange = (pageNumber) => {
     setCurrentRecommendationPage(pageNumber);
      setWeatherData(prevData => ({
       ...prevData,
-      activityText: `Página ${pageNumber}. test`
+      activityText: `${recs.recommendations[pageNumber-1].name}`
     }));
+    console.log(pageNumber);
   };
+  // console.log(handlePageChange);
 
   return (
     <div className={styles.dailyRecWrapper}>
