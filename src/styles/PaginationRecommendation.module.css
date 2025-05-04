@@ -1,5 +1,5 @@
 .recommendation_buttons {
-    position: absolute;
+    position: relative;
     bottom: 0;
     padding: 0.5rem;
     margin-bottom: 50px;
