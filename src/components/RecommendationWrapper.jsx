@@ -10,7 +10,6 @@ export default function RecommendationWrapper() {
       <div style={{ marginBottom: '2rem' }}>
         <ManualLocation />
       </div>
-      {/* <WeeklyRecommendations /> */}
     </div>
   );
 }

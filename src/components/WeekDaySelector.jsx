@@ -11,11 +11,10 @@ function WeekdaySelector({ selectedDay, onDayChange }) {
   const tomorrow = DAYS_OF_WEEK[currentDay.getDay() % 7];
   const dayAfterTomorrow = DAYS_OF_WEEK[(currentDay.getDay() + 1) % 7];
 
-  // Create an array describing the three buttons we want to render
   const daysToDisplay = [
     {
-      display: 'Hoy',             // Text to show on the button
-      actualDay: today, // The real day name this button represents
+      display: 'Hoy',
+      actualDay: today,
     },
     {
       display: tomorrow,
