@@ -6,7 +6,7 @@ import styles from '@/styles/WeeklyRecommendation.module.css';
 
 const DAYS_OF_WEEK = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
-function WeeklyRecommendations(recs) {
+function WeeklyRecommendations({ recs }) {
   const [currentDay, setCurrentDay] = useState('');
 
   useEffect(() => {
@@ -19,13 +19,19 @@ function WeeklyRecommendations(recs) {
     setCurrentDay(newDay);
   };
 
+  const todayIndex = 0;
+  const tomorrowIndex = 1;
+  const dayAfterTomorrow = 2;
+
+  console.log("WeekyRecommendations.jsx", recs);
   return (
     <div className={styles.weekly_wrapper}>
+      {/* <p>{recs}</p> */}
       <p>
         Selected Day: <strong>{currentDay || 'None'}</strong>
       </p>
       <WeekdaySelector selectedDay={currentDay} onDayChange={handleDayChange} />
-      <DailyRecommendation weekDay={currentDay} />
+      <DailyRecommendation weekDay={currentDay} recs={recs[todayIndex]} />
     </div>
   );
 }
