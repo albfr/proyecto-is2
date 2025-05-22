@@ -7,7 +7,7 @@ const DAYS_OF_WEEK = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sáb
 function WeekdaySelector({ selectedDay, onDayChange }) {
   const currentDay = new Date();
   
-  const today = DAYS_OF_WEEK[(currentDay.getDay() + 5 ) % 7];
+  const today = DAYS_OF_WEEK[(currentDay.getDay() + 6 ) % 7];
   const tomorrow = DAYS_OF_WEEK[currentDay.getDay() % 7];
   const dayAfterTomorrow = DAYS_OF_WEEK[(currentDay.getDay() + 1) % 7];
 
