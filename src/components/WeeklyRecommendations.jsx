@@ -22,26 +22,19 @@ function WeeklyRecommendations({ recs }) {
       const todayObj = new Date();
     const todayDayIndex = (todayObj.getDay() + 6) % 7; // Monday = 0
     const actualTodayName = DAYS_OF_WEEK[todayDayIndex];
-    console.log("Actual today is:", actualTodayName); // For debugging
-
-    // Try to find data for actualTodayName
     let dataForToday = recs.find(r => getDayNameFromDate(r.day) === actualTodayName);
 
     if (dataForToday) {
-      // console.log("Found data for actual today:", actualTodayName, dataForToday); // For debugging
-      setCurrentDayName(actualTodayName); // <--- `currentDayName` is SET HERE
+      setCurrentDayName(actualTodayName);
       setSelectedDayData(dataForToday);
     } else {
-      // If no data for today, default to the first day in recs
       const firstDayNameInRecs = getDayNameFromDate(recs[0].day);
-      // console.warn(`No data for ${actualTodayName}. Defaulting to ${firstDayNameInRecs}`); // For debugging
-      setCurrentDayName(firstDayNameInRecs); // <--- `currentDayName` is SET HERE
+      setCurrentDayName(firstDayNameInRecs);
       setSelectedDayData(recs[0]);
     }
   } else {
-    setCurrentDayName(''); // <--- `currentDayName` is SET HERE (to empty if no recs)
+    setCurrentDayName('');
     setSelectedDayData(null);
-    // console.log("No recs or empty recs."); // For debugging
   }
 }, [recs]);
 
