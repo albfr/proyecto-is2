@@ -25,9 +25,6 @@ function DailyRecommendation({ weekDayName, dayData }) {
   useEffect(() => {
     setCurrentRecommendationPage(1);
   }, [dayData]);
-  if (!dayData) {
-    return <p>Cargando datos diarios...</p>;
-  }
 
   const {
     day: dateApiString,
@@ -52,7 +49,7 @@ function DailyRecommendation({ weekDayName, dayData }) {
     currentActivityText = recommendations[currentRecommendationPage - 1].name;
   }
 
-  const healthTips = 'Mantente hidratado y usa protector solar. Considera las condiciones al planificar.';
+  const healthTips = 'Mantente hidratado y usa protector solar. Considera las condiciones al planificar.';  //Placeholder
   const imageSrc = "./sun.png"; //Placeholder
   const imageAlt = 'Representación del clima';
 

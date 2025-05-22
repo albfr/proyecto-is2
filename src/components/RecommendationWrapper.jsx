@@ -38,7 +38,7 @@ export default function RecommendationWrapper() {
         <WeeklyRecommendations recs={recommendationsData} />
       )}
       {!loading && !error && (!recommendationsData || recommendationsData.length === 0) && (
-        <p>No existen recomendaciones disponibles en este momento!</p>
+        <p>No existen recomendaciones disponibles en este momento!!!</p>
       )}
     </div>
   );
