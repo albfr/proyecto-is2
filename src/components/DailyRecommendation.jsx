@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import WeatherImage from './WeatherImage';
 import WeatherSummary from './WeatherSummary';
 import WeatherDetails from './WeatherDetails';
@@ -8,73 +8,87 @@ import RecommendationPagination from './PaginationRecommendation';
 
 import styles from '@/styles/DailyRecommendation.module.css';
 
-function DailyRecommendation( {weekDay, recs} ) {
-  const [currentRecommendationPage, setCurrentRecommendationPage] = useState(1);
-  const totalRecommendationPages = recs.recommendations.length;   //<--- This should be dynamic through uhh fetching? Just using five as an example lolol
+const formatDate = (dateString) => {
+  if (!dateString) return '';
+  try {
+    const [year, month, day] = dateString.split('-');
+    return `${day}/${month}/${year}`;
+  } catch (error) {
+    console.warn("Could not format date:", dateString);
+    return dateString; 
+  }
+};
 
-  //Example!!! Fetch weather data!!!
-  console.log(weekDay, recs);
-  // const weatherData = {
-  const [weatherData, setWeatherData] = useState({
-    day: weekDay,
-    date: '24/06/2024',
-    maxTemp: 30,
-    minTemp: 18,
-    humidity: 55,
-    feelsLike: 32,
-    uvIndex: 8,
-    shadeFeelsLike: 28,
-    windSpeed: 15,
-    healthTips: 'Mantente hidratado y usa protector solar',
-    activityText: `Página ${currentRecommendationPage}: Correr es una buena idea :D.`,
-    imageSrc: "./sun.png",
-    imageAlt: 'Sol brillante'
-  });
-  // const weatherData = recs;
-  console.log("weatherData", weatherData);
-  console.log("hola", recs);
+function DailyRecommendation({ weekDayName, dayData }) {
+  const [currentRecommendationPage, setCurrentRecommendationPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentRecommendationPage(1);
+  }, [dayData]);
+  if (!dayData) {
+    return <p>Cargando datos diarios...</p>;
+  }
+
+  const {
+    day: dateApiString,
+    maxTemp,
+    minTemp,
+    humidity,
+    feelsLike,
+    uvIndex,
+    shadeFeelsLike,
+    windSpeed,
+    recommendations
+  } = dayData;
+
+  const totalRecommendationPages = recommendations ? recommendations.length : 0;
 
   const handlePageChange = (pageNumber) => {
     setCurrentRecommendationPage(pageNumber);
-     setWeatherData(prevData => ({
-      ...prevData,
-      activityText: `${recs.recommendations[pageNumber-1].name}`
-    }));
-    console.log(pageNumber);
   };
-  // console.log(handlePageChange);
+
+  let currentActivityText = "No activities recommended for this day.";
+  if (recommendations && recommendations.length > 0 && currentRecommendationPage > 0 && currentRecommendationPage <= recommendations.length) {
+    currentActivityText = recommendations[currentRecommendationPage - 1].name;
+  }
+
+  const healthTips = 'Mantente hidratado y usa protector solar. Considera las condiciones al planificar.';
+  const imageSrc = "./sun.png"; //Placeholder
+  const imageAlt = 'Representación del clima';
 
   return (
     <div className={styles.dailyRecWrapper}>
       <div className={styles.info_column}>
-        <WeatherImage src={weatherData.imageSrc} alt={weatherData.imageAlt} />
+        <WeatherImage src={imageSrc} alt={imageAlt} />
         <div className={styles.data_grid}>
           <WeatherSummary
-            day={weatherData.day}
-            date={weatherData.date}
-            maxTemp={weatherData.maxTemp}
-            minTemp={weatherData.minTemp}
-            humidity={weatherData.humidity}
+            day={weekDayName}
+            date={formatDate(dateApiString)}
+            maxTemp={maxTemp}
+            minTemp={minTemp}
+            humidity={humidity}
           />
           <WeatherDetails
-            feelsLike={weatherData.feelsLike}
-            uvIndex={weatherData.uvIndex}
-            shadeFeelsLike={weatherData.shadeFeelsLike}
-            windSpeed={weatherData.windSpeed}
+            feelsLike={feelsLike}
+            uvIndex={uvIndex}
+            shadeFeelsLike={shadeFeelsLike}
+            windSpeed={windSpeed}
           />
         </div>
-        <HealthCareTips tips={weatherData.healthTips} />
+        <HealthCareTips tips={healthTips} />
       </div>
 
       <div className={styles.recommendation_column}>
         <h1 className={styles.recommendation_title}>Actividades Recomendadas</h1>
-        <ActivityRecommendation text={weatherData.activityText} />
-        <RecommendationPagination
-          totalPages={totalRecommendationPages}
-          currentPage={currentRecommendationPage}
-          onPageChange={handlePageChange}
-          name="recommendation-page-selector"
-        />
+        <ActivityRecommendation text={currentActivityText} />
+        {totalRecommendationPages > 0 && (
+          <RecommendationPagination
+            totalPages={totalRecommendationPages}
+            currentPage={currentRecommendationPage}
+            onPageChange={handlePageChange}
+            name="recommendation-page-selector"
+          />
+        )}
       </div>
     </div>
   );
