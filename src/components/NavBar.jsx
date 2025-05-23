@@ -1,13 +1,9 @@
 import React from 'react';
 import styles from '@/styles//NavBar.module.css';
-import AutomaticLocation from './AutomaticLocation';
 
 function NavBar() {
   return (
     <div className={styles.navbar}>
-      <div className={styles.left}>
-        <AutomaticLocation />
-      </div>
 
       <div className={styles.center}>
         <img src="./logo.png" alt="Logo" className={styles.logo} />
