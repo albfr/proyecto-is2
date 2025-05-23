@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     data.push({"forecastday": forecast.map(f => {
       return {
           date: f.date,
-          weather: f.day
+          ...f.day
       };
     })});
 
