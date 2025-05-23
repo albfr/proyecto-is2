@@ -5,16 +5,20 @@ import getActivities from "@/lib/query/getActivities";
 export default async function handler(req, res) {
   try {
 
+    // hardcodedData should equal res.forecastday
+    // where res is the awaited response of the JSON of this API
+    // PERO PARA ACCEDER A LAS RECOMMENDATIONS HAY QUE USARLO SIN ENTRAR A FORECASTDAY
+    // UN MOMENTO QUE LO VOY A ARREGLAR
     const hardcodedData = [
     {
         "day": "2025-05-22",
-        "maxTemp": 40,
-        "minTemp": 18,
-        "humidity": 55,
-        "feelsLike": 32,
-        "uvIndex": 8,
-        "shadeFeelsLike": 28,
-        "windSpeed": 15,
+        "maxTemp": 40, // maxtemp_c
+        "minTemp": 18, // mintemp_c
+        "humidity": 55, // avghumidity
+        "feelsLike": 32, // NO LO TENEMOS
+        "uvIndex": 8, // uv
+        "shadeFeelsLike": 28, // NO LO TENEMOS
+        "windSpeed": 15, // maxwind_kph
         "recommendations": [
             {
                 "name": "Salir a trotar",
