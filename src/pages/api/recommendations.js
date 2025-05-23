@@ -7,11 +7,9 @@ export default async function handler(req, res) {
 
     // hardcodedData should equal res.forecastday
     // where res is the awaited response of the JSON of this API
-    // PERO PARA ACCEDER A LAS RECOMMENDATIONS HAY QUE USARLO SIN ENTRAR A FORECASTDAY
-    // UN MOMENTO QUE LO VOY A ARREGLAR
     const hardcodedData = [
     {
-        "day": "2025-05-22",
+        "day": "2025-05-22", // date
         "maxTemp": 40, // maxtemp_c
         "minTemp": 18, // mintemp_c
         "humidity": 55, // avghumidity
