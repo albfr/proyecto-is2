@@ -29,7 +29,12 @@ export default async function handler(req, res) {
       data.push({"day": day.date, "recommendations": dayrecs});
     });
 
-    data.push({"forecastday": forecast});
+    data.push({"forecastday": forecast.map(f => {
+      return {
+          date: f.date,
+          weather: f.day
+      };
+    })});
 
     res.status(200).json(data);
   }
