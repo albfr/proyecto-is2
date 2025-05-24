@@ -28,8 +28,8 @@ export default function RecommendationWrapper() {
   return (
     <div className={styles.recWrap}>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginBottom: '1rem' }}>
-        <ManualLocation onCoordsReady={obtenerRecomendaciones} />
         <AutomaticLocation onCoordsReady={obtenerRecomendaciones} />
+        <ManualLocation onCoordsReady={obtenerRecomendaciones} />
       </div>
 
       {loading && <p>Cargando recomendaciones...</p>}
