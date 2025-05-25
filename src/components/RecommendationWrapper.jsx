@@ -14,12 +14,13 @@ export default function RecommendationWrapper() {
         setLoading(true);
         //This fetches from ./pages/api/recommendations.js
         const response = await fetch('/pages/api/recommendations');
+ 
         const data = await response.json();
         setRecommendationsData(data);
         setError(null);
-      } catch (e) {
-        console.error("Failed to fetch recommendations:", e);
-        setError(e.message);
+      } catch {
+        console.error("Failed to fetch recommendations:");
+        //setError(e.message);
         setRecommendationsData(null);
       } finally {
         setLoading(false);

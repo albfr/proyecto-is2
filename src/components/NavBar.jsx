@@ -6,7 +6,7 @@ function NavBar() {
   return (
     <div className={styles.navbar}>
       <div className={styles.left}>
-        <AutomaticLocation />
+        {/* <AutomaticLocation /> */}
       </div>
 
       <div className={styles.center}>
