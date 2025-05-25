@@ -1,0 +1,8 @@
+.profile_view{
+    border: 1px solid hsl(0, 100%, 56%);
+    column-gap: 20px;
+    display: grid;
+    grid-template-areas:
+      "ActivityBar ActivityBoard";
+    align-items: flex-start;
+}

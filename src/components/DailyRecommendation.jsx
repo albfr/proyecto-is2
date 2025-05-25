@@ -4,7 +4,7 @@ import WeatherSummary from './WeatherSummary';
 import WeatherDetails from './WeatherDetails';
 import HealthCareTips from './HealthcareTips';
 import ActivityRecommendation from './ActivityRecommendation';
-import RecommendationPagination from './PaginationRecommendation';
+//import RecommendationPagination from './PaginationRecommendation';
 
 import styles from '@/styles/DailyRecommendation.module.css';
 
@@ -20,11 +20,9 @@ const formatDate = (dateString) => {
 };
 
 function DailyRecommendation({ weekDayName, dayData }) {
-  const [currentRecommendationPage, setCurrentRecommendationPage] = useState(1);
-
-  useEffect(() => {
-    setCurrentRecommendationPage(1);
-  }, [dayData]);
+  if (!dayData) {
+    return <p>Cargando datos diarios...</p>;
+  }
 
   const {
     day: dateApiString,
@@ -37,16 +35,23 @@ function DailyRecommendation({ weekDayName, dayData }) {
     windSpeed,
     recommendations
   } = dayData;
+  const totalRecommendations = recommendations ? recommendations.length : 0;
 
-  const totalRecommendationPages = recommendations ? recommendations.length : 0;
+  recommendations.sort((a, b) => {
+    return(a.similarity < b.similarity);
+  })
+  let selectedRecommendations = recommendations.slice(0, Math.min(5, totalRecommendations));
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentRecommendationPage(pageNumber);
-  };
-
-  let currentActivityText = "No activities recommended for this day.";
-  if (recommendations && recommendations.length > 0 && currentRecommendationPage > 0 && currentRecommendationPage <= recommendations.length) {
-    currentActivityText = recommendations[currentRecommendationPage - 1].name;
+  let activityRecommendations = [];
+  if (selectedRecommendations) {
+    activityRecommendations = selectedRecommendations.map(recommendation => {
+      return(
+        <ActivityRecommendation
+          text={recommendation.name}
+          similarity={recommendation.similarity}
+        />
+      )
+    })
   }
 
   const healthTips = 'Mantente hidratado y usa protector solar. Considera las condiciones al planificar.';  //Placeholder
@@ -77,15 +82,10 @@ function DailyRecommendation({ weekDayName, dayData }) {
 
       <div className={styles.recommendation_column}>
         <h1 className={styles.recommendation_title}>Actividades Recomendadas</h1>
-        <ActivityRecommendation text={currentActivityText} />
-        {totalRecommendationPages > 0 && (
-          <RecommendationPagination
-            totalPages={totalRecommendationPages}
-            currentPage={currentRecommendationPage}
-            onPageChange={handlePageChange}
-            name="recommendation-page-selector"
-          />
-        )}
+        {totalRecommendations > 0 && activityRecommendations}
+        {totalRecommendations == 0 && 
+          <p>No existen recomendaciones disponibles en este momento!</p>
+        }
       </div>
     </div>
   );
