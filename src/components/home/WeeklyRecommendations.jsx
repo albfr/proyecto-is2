@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DailyRecommendation from './DailyRecommendation';
 import WeekdaySelector from './WeekDaySelector';
 
-import styles from '@/styles/WeeklyRecommendation.module.css';
+import styles from '@/styles/home/WeeklyRecommendation.module.css';
 
 const DAYS_OF_WEEK = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 

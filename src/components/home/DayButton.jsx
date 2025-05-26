@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/styles/DayButton.module.css';
+import styles from '@/styles/home/DayButton.module.css';
 
 function DayButton({ day, isSelected, onClick }) {
   const buttonClassName = `${styles.day_button} ${isSelected ? styles.selected : ''}`;

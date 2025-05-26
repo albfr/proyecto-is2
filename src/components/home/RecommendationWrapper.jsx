@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ManualLocation from '@/components/home/ManualLocation';
 import AutomaticLocation from '@/components/home/AutomaticLocation';
 import WeeklyRecommendations from '@/components/home/WeeklyRecommendations';
-import styles from '@/styles/RecommendationWrapper.module.css';
+import styles from '@/styles/home/RecommendationWrapper.module.css';
 
 export default function RecommendationWrapper() {
   const [recommendationsData, setRecommendationsData] = useState(null);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "@/styles/ActivityModification.module.css";
+import styles from "@/styles/perfil/ActivityModification.module.css";
 
 //INTENTÉ PONER CADA TIPO DE USER INPUT EN DISTINTOS ARCHIVOS, PERO POR ALGUNA RAZÓN TODO EL CSS SE DESTRUIA T-T
 //Si quiere, el Cano me puede ayudar a Reactificar todo esto. Traté de que se viera lo más ordenado posible.

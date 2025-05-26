@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/styles/WeatherSummary.module.css'
+import styles from '@/styles/home/WeatherSummary.module.css'
 
 function WeatherSummary({ day, date, maxTemp, minTemp, humidity }) {    //Receives specific weather data points via props.
   return (
