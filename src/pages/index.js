@@ -1,7 +1,7 @@
 import Head from "next/head";
 //import { Geist, Geist_Mono } from "next/font/google";
 import NavBar from "@/components/NavBar";
-import RecommendationWrapper from "@/components/RecommendationWrapper";
+import RecommendationWrapper from "@/components/home/RecommendationWrapper";
 import styles from "@/styles/Index.module.css";
 
 // const geistSans = Geist({

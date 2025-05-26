@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NavBar from "@/components/NavBar";
-import ActivityModification from "@/components/ActivityModification";
+import ActivityModification from "@/components/perfil/ActivityModification";
 import Index from "@/styles/Index.module.css";
 import ProfileWrapper from "@/styles/ProfileWrapper.module.css";
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ManualLocation from '@/components/ManualLocation';
-import AutomaticLocation from '@/components/AutomaticLocation';
-import WeeklyRecommendations from '@/components/WeeklyRecommendations';
+import ManualLocation from '@/components/home/ManualLocation';
+import AutomaticLocation from '@/components/home/AutomaticLocation';
+import WeeklyRecommendations from '@/components/home/WeeklyRecommendations';
 import styles from '@/styles/RecommendationWrapper.module.css';
 
 export default function RecommendationWrapper() {
