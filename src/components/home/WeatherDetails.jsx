@@ -7,7 +7,7 @@ function WeatherDetails({ feelsLike, uvIndex, shadeFeelsLike, windSpeed }) {
       <div className={styles.grid_item}><b>Sensaciónº: </b>{feelsLike ?? 'N/A'}</div>
       <div className={styles.grid_item}><b>índice UV: </b>{uvIndex ?? 'N/A'}</div>
       <div className={styles.grid_item}><b>Sensación en la sombraº: </b>{shadeFeelsLike ?? 'N/A'}</div>
-      <div className={styles.grid_item}><b>Viento: {windSpeed ?? 'N/A'} km/h</b></div>
+      <div className={styles.grid_item}><b>Viento: </b>{windSpeed ?? 'N/A'} km/h</div>
     </div>
   );
 }

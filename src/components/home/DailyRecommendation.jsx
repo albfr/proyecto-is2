@@ -26,13 +26,14 @@ function DailyRecommendation({ weekDayName, dayData }) {
 
   const {
     day: dateApiString,
-    maxTemp,
-    minTemp,
-    humidity,
+    maxtemp_c,
+    mintemp_c,
+    avghumidity,
     feelsLike,
-    uvIndex,
+    avgtemp_c,
+    uv,
     shadeFeelsLike,
-    windSpeed,
+    maxwind_kph,
     recommendations
   } = dayData;
   const totalRecommendations = recommendations ? recommendations.length : 0;
@@ -54,7 +55,7 @@ function DailyRecommendation({ weekDayName, dayData }) {
     })
   }
 
-  const healthTips = 'Mantente hidratado y usa protector solar. Considera las condiciones al planificar.';
+  const healthTips = 'Mantente hidratado y usa protector solar. Considera las condiciones al planificar.';  //Placeholder
   const imageSrc = "./sun.png"; //Placeholder
   const imageAlt = 'Representación del clima';
 
@@ -66,15 +67,15 @@ function DailyRecommendation({ weekDayName, dayData }) {
           <WeatherSummary
             day={weekDayName}
             date={formatDate(dateApiString)}
-            maxTemp={maxTemp}
-            minTemp={minTemp}
-            humidity={humidity}
+            maxTemp={maxtemp_c}
+            minTemp={mintemp_c}
+            humidity={avghumidity}
           />
           <WeatherDetails
-            feelsLike={feelsLike}
-            uvIndex={uvIndex}
-            shadeFeelsLike={shadeFeelsLike}
-            windSpeed={windSpeed}
+            feelsLike={Math.round((6.105*avghumidity/100)*(Math.exp(17.27*avgtemp_c/(237.7+avgtemp_c)))*100)/100}
+            uvIndex={uv}
+            shadeFeelsLike={(Math.round((6.105*avghumidity/100)*(Math.exp(17.27*avgtemp_c/(237.7+avgtemp_c)))*100)/100)-2}
+            windSpeed={maxwind_kph}
           />
         </div>
         <HealthCareTips tips={healthTips} />
