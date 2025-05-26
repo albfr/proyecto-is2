@@ -15,6 +15,7 @@ export default function RecommendationWrapper() {
       const res = await fetch(`/api/recommendations?lat=${lat}&lon=${lon}`);
       const data = await res.json();
       setRecommendationsData(data);
+      console.log(data);
       setError(null);
     } catch (e) {
       console.error("Error al obtener recomendaciones:", e);

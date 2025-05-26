@@ -4,164 +4,6 @@ import getActivities from "@/lib/query/getActivities";
 
 export default async function handler(req, res) {
   try {
-
-<<<<<<< HEAD
-    // hardcodedData should equal res.forecastday
-    // where res is the awaited response of the JSON of this API
-    const hardcodedData = [
-    {
-        "day": "2025-05-22", // date
-        "maxTemp": 40, // maxtemp_c
-        "minTemp": 18, // mintemp_c
-        "humidity": 55, // avghumidity
-        "feelsLike": 32, // NO LO TENEMOS
-        "uvIndex": 8, // uv
-        "shadeFeelsLike": 28, // NO LO TENEMOS
-        "windSpeed": 15, // maxwind_kph
-        "recommendations": [
-            {
-                "name": "Salir a trotar",
-                "similarity": 0.8112535173763298
-            },
-            {
-                "name": "Pasear al perro",
-                "similarity": 0.7597778883860854
-            },
-            {
-                "name": "Jardinería",
-                "similarity": 0.8058796067167552
-            }
-        ]
-    },
-    {
-        "day": "2025-05-23",
-        "maxTemp": 20,
-        "minTemp": 4,
-        "humidity": 21,
-        "feelsLike": 16,
-        "uvIndex": 10,
-        "shadeFeelsLike": 8,
-        "windSpeed": 10,
-        "recommendations": [
-            {
-                "name": "Salir a trotar",
-                "similarity": 0.998675142670469
-            },
-            {
-                "name": "Pasear al perro",
-                "similarity": 0.9222583618379916
-            },
-            {
-                "name": "Jardinería",
-                "similarity": 0.9878069445176232
-            }
-        ]
-    },
-    {
-        "day": "2025-05-24",
-        "maxTemp": 50,
-        "minTemp": 30,
-        "humidity": 6,
-        "feelsLike": 36,
-        "uvIndex": 20,
-        "shadeFeelsLike": 32,
-        "windSpeed": 8,
-        "recommendations": [
-            {
-                "name": "Salir a trotar",
-                "similarity": 0.9902450663507474
-            },
-            {
-                "name": "Pasear al perro",
-                "similarity": 0.9152277379637164
-            },
-            {
-                "name": "Jardinería",
-                "similarity": 0.9780763386896373
-            }
-        ]
-    }
-]
-    res.status(200).json(hardcodedData);  //Remove when moving to dev :D.
-    return;                               
-=======
-//     const hardcodedData = [
-//     {
-//         "day": "2025-05-22",
-//         "maxTemp": 40,
-//         "minTemp": 18,
-//         "humidity": 55,
-//         "feelsLike": 32,
-//         "uvIndex": 8,
-//         "shadeFeelsLike": 28,
-//         "windSpeed": 15,
-//         "recommendations": [
-//             {
-//                 "name": "Salir a trotar",
-//                 "similarity": 0.8112535173763298
-//             },
-//             {
-//                 "name": "Pasear al perro",
-//                 "similarity": 0.7597778883860854
-//             },
-//             {
-//                 "name": "Jardinería",
-//                 "similarity": 0.8058796067167552
-//             }
-//         ]
-//     },
-//     {
-//         "day": "2025-05-23",
-//         "maxTemp": 20,
-//         "minTemp": 4,
-//         "humidity": 21,
-//         "feelsLike": 16,
-//         "uvIndex": 10,
-//         "shadeFeelsLike": 8,
-//         "windSpeed": 10,
-//         "recommendations": [
-//             {
-//                 "name": "Salir a trotar",
-//                 "similarity": 0.998675142670469
-//             },
-//             {
-//                 "name": "Pasear al perro",
-//                 "similarity": 0.9222583618379916
-//             },
-//             {
-//                 "name": "Jardinería",
-//                 "similarity": 0.9878069445176232
-//             }
-//         ]
-//     },
-//     {
-//         "day": "2025-05-24",
-//         "maxTemp": 50,
-//         "minTemp": 30,
-//         "humidity": 6,
-//         "feelsLike": 36,
-//         "uvIndex": 20,
-//         "shadeFeelsLike": 32,
-//         "windSpeed": 8,
-//         "recommendations": [
-//             {
-//                 "name": "Salir a trotar",
-//                 "similarity": 0.9902450663507474
-//             },
-//             {
-//                 "name": "Pasear al perro",
-//                 "similarity": 0.9152277379637164
-//             },
-//             {
-//                 "name": "Jardinería",
-//                 "similarity": 0.9780763386896373
-//             }
-//         ]
-//     }
-// ]
-    // res.status(200).json(hardcodedData);  //Remove when moving to dev :D.
-    // return;                               
->>>>>>> frontend
     const lat = req.query.lat;
     const lon = req.query.lon;
     const city = req.query.city;
@@ -184,11 +26,70 @@ export default async function handler(req, res) {
       activities.forEach(activity => {
         dayrecs.push({"name": activity.name, "similarity": cosineSimilarity(day.day, activity)});
       });
-      data.push({"day": day.date, "recommendations": dayrecs});
+      data.push({"date": day.date, "recommendations": dayrecs});
     });
 
-    data.push({"forecastday": forecast});
-    res.status(200).json(data);
+    const reduced_forecast = forecast.map(f => {
+      return {
+        date: f.date,
+        ...f.day
+      };
+    });
+
+    const recommendations_with_weather = [];
+
+    for (let i = 0; i < data.length; i++) {
+        let matched = false;
+
+        for (let j = 0; j < reduced_forecast.length; j++) {
+            if (data[i].date == reduced_forecast[j].date) {
+                const f_no_date = JSON.parse(JSON.stringify(
+                    reduced_forecast[j]
+                ));
+                delete f_no_date.date;
+
+                recommendations_with_weather.push({
+                    ...data[i],
+                    ...f_no_date
+                });
+
+                matched = true;
+                break;
+            }
+        }
+
+        if (!matched) {
+            recommendations_with_weather.push({
+                ...data[i],
+                "maxtemp_c": undefined,
+                "maxtemp_f": undefined,
+                "mintemp_c": undefined,
+                "mintemp_f": undefined,
+                "avgtemp_c": undefined,
+                "avgtemp_f": undefined,
+                "maxwind_mph": undefined,
+                "maxwind_kph": undefined,
+                "totalprecip_mm": undefined,
+                "totalprecip_in": undefined,
+                "totalsnow_cm": undefined,
+                "avgvis_km": undefined,
+                "avgvis_miles": undefined,
+                "avghumidity": undefined,
+                "daily_will_it_rain": undefined,
+                "daily_chance_of_rain": undefined,
+                "daily_will_it_snow": undefined,
+                "daily_chance_of_snow": undefined,
+                "condition": {
+                  "text": undefined,
+                  "icon": undefined,
+                  "code": undefined
+                },
+                "uv": undefined
+            });
+        }
+    }
+
+    res.status(200).json(recommendations_with_weather);
   }
   catch (err) {
     console.error(err);
