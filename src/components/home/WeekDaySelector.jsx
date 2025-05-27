@@ -26,6 +26,9 @@ function WeekdaySelector({ selectedDay, onDayChange }) {
     },
   ];
 
+  //console.log('selectedDay:', selectedDay);
+  //daysToDisplay.forEach(d => console.log('actualDay:', d.actualDay));
+
   return (
     <div className={styles.weekday_selector}>
       {daysToDisplay.map((dayInfo) => (
