@@ -5,7 +5,7 @@ function WeatherSummary({ day, date, maxTemp, minTemp, humidity }) {    //Receiv
   return (
     <div className={styles.day_date_temp_hum}>
       <div className={styles.double_row_display}>
-        <h2 className={styles.grid_item}><b>{day.weekday || 'Día'}</b></h2>
+        <h2 className={styles.grid_item}><b>{day || 'Día'}</b></h2>
         <h5 className={styles.grid_item}>{date || 'Fecha'}</h5>
       </div>
       <div className={styles.double_col_display}>

@@ -1,41 +1,29 @@
 import React from 'react';
-import AutomaticLocation from './AutomaticLocation';
+import { useRouter } from 'next/router';
+import styles from '@/styles/NavBar.module.css';
 
 function NavBar() {
+  const router = useRouter();
+
+  const PerfilLoad = () => {
+    router.push('/perfil');
+  };
+    const MenuLoad = () => {
+    router.push('/');
+  };
+
   return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      backgroundColor: '#f5f5f5',
-      padding: '0 2rem',
-      borderBottom: '1px solid #ccc',
-      position: 'sticky',
-      top: 0,
-      width: '94.3vw',
-      zIndex: 1000,
-      height: '70px',
-    }}>
-      <div style={{ flex: 1 }}>
-        <AutomaticLocation />
+    <div className={styles.navbar}>
+
+      <div className={styles.center}>
+        <button className={styles.userButton} onClick={MenuLoad}>
+          <img src="./logo.png" alt="Logo" className={styles.logo} />
+        </button>
       </div>
 
-      <div style={{ flex: 1, textAlign: 'center' }}>
-        <img src="./logo.png" alt="Logo" style={{ height: '50px', objectFit: 'contain' }} />
-      </div>
-
-      <div style={{ flex: 1, textAlign: 'right' }}>
-        <button style={{
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          padding: 0,
-        }}>
-          <img
-            src="/usuario.png"
-            alt="User"
-            style={{ height: '40px', width: '40px', borderRadius: '50%', objectFit: 'cover' }}
-          />
+      <div className={styles.right}>
+        <button className={styles.userButton} onClick={PerfilLoad}>
+          <img src="/usuario.png" alt="User" className={styles.userImg} />
         </button>
       </div>
     </div>

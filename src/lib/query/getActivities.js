@@ -1,7 +1,7 @@
 import connectionPool from "@/lib/db";
 
 export default async function getActivities() {
-  const query = 'SELECT * FROM "Activity"';
+  const query = 'SELECT * FROM public."Activity"';
   let activities = await connectionPool.query(query);
   return activities.rows;
 };
