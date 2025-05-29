@@ -13,8 +13,9 @@ const getDayNameFromDate = (dateString) => {
   return DAYS_OF_WEEK[adjustedIndex];
 };
 
+
 function WeeklyRecommendations({ recs }) {
-  const [currentDayName, setCurrentDayName] = useState('');
+  const [currentDayName, setCurrentDayName] = useState(null);
   const [selectedDayData, setSelectedDayData] = useState(null);
 
   useEffect(() => {
@@ -22,13 +23,19 @@ function WeeklyRecommendations({ recs }) {
       const todayObj = new Date();
     const todayDayIndex = (todayObj.getDay() + 6) % 7; // Monday = 0
     const actualTodayName = DAYS_OF_WEEK[todayDayIndex];
-    let dataForToday = recs.find(r => getDayNameFromDate(r.day) === actualTodayName);
+    //console.log("Recs raw:", recs);
+    console.log(recs[0].day)
+
+    //console.log("Recs days:", recs.map(r => getDayNameFromDate(r.day)));
+    //console.log("Today should be:", actualTodayName);
+
+    let dataForToday = recs.find(r => getDayNameFromDate(r.date) === actualTodayName);
 
     if (dataForToday) {
       setCurrentDayName(actualTodayName);
       setSelectedDayData(dataForToday);
     } else {
-      const firstDayNameInRecs = getDayNameFromDate(recs[0].day);
+      const firstDayNameInRecs = getDayNameFromDate(recs[0].date);
       setCurrentDayName(firstDayNameInRecs);
       setSelectedDayData(recs[0]);
     }
@@ -41,7 +48,7 @@ function WeeklyRecommendations({ recs }) {
   const handleDayChange = (newDayName) => {
     setCurrentDayName(newDayName);
     if (recs) {
-      const newSelectedData = recs.find(r => getDayNameFromDate(r.day) === newDayName);
+      const newSelectedData = recs.find(r => getDayNameFromDate(r.date) === newDayName);
       setSelectedDayData(newSelectedData || null);
     }
   };
@@ -55,8 +62,8 @@ function WeeklyRecommendations({ recs }) {
 
       {selectedDayData ? (
         <DailyRecommendation
-          key={selectedDayData.day} 
-          weekDayName={currentDayName} 
+          key={selectedDayData.date} 
+          weekDayName={currentDayName}
           dayData={selectedDayData}  
         />
       ) : (
