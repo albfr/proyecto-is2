@@ -18,17 +18,7 @@ export default function Perfil() {
 
   return (
     <>
-      <div className={Index.screenWrapper}>
-        <NavBar />
-      </div>
-      <div>
-        <ActivityBar />
-      </div>
-    </>
-  );
-}
-
-/*  <div className={ProfileWrapper.profile_view}>
+  <div className={ProfileWrapper.profile_view}>
         <button onClick={openModal} className={ProfileWrapper.create_button}>Crear Actividad</button>
       {isModalOpen && (
           <div className={ProfileWrapper.modal_overlay} onClick={closeModal}>
@@ -40,4 +30,18 @@ export default function Perfil() {
             </div>
           </div>
         )}
-      </div> */
+      </div> 
+    </>
+  );
+}
+
+
+
+
+/*       <div className={Index.screenWrapper}>
+        <NavBar />
+      </div>
+      <div>
+        <ActivityBar />
+      </div>
+      */
