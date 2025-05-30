@@ -1,6 +1,6 @@
 import { getForecastFromCity, getForecastFromLatLon } from "@/lib/query/getForecast";
- import { cosineSimilarity } from "@/lib/similarity";
-import getActivities from "@/lib/query/getActivities";
+import { cosineSimilarity } from "@/lib/similarity";
+import { getActivities } from "@/lib/query/getActivities";
 
 export default async function handler(req, res) {
   try {
