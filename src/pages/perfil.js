@@ -21,19 +21,6 @@ export default function Perfil() {
       <div className={Index.screenWrapper}>
         <NavBar />
       </div>
-      <div className={ProfileWrapper.profile_view}>
-        <button onClick={openModal} className={ProfileWrapper.create_button}>Crear Actividad</button>
-      {isModalOpen && (
-          <div className={ProfileWrapper.modal_overlay} onClick={closeModal}>
-            <div
-              className={ProfileWrapper.modal_content}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ActivityModification onClose={closeModal}/>
-            </div>
-          </div>
-        )}
-      </div>
       <div>
         <ActivityBoard/>
       </div>
