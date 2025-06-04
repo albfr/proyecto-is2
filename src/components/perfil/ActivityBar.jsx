@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/styles/ActivityBar.module.css';
+import styles from '@/styles/perfil/ActivityBar.module.css';
 
 function ActivityBar() {
   return (
