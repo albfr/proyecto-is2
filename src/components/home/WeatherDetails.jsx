@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/styles/WeatherDetails.module.css'
+import styles from '@/styles/home/WeatherDetails.module.css'
 
 function WeatherDetails({ feelsLike, uvIndex, shadeFeelsLike, windSpeed }) {
   return (

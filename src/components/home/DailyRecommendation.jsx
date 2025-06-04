@@ -6,7 +6,7 @@ import HealthCareTips from './HealthcareTips';
 import ActivityRecommendation from './ActivityRecommendation';
 //import RecommendationPagination from './PaginationRecommendation';
 
-import styles from '@/styles/DailyRecommendation.module.css';
+import styles from '@/styles/home/DailyRecommendation.module.css';
 
 const formatDate = (dateString) => {
   if (!dateString) return '';

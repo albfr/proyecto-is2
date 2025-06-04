@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/styles/HealthcareTips.module.css'
+import styles from '@/styles/home/HealthcareTips.module.css'
 
 function HealthCareTips({ tips }) {     //Receives the tips text.
   return (

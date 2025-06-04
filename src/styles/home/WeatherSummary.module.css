@@ -1,0 +1,23 @@
+.day_date_temp_hum {
+    grid-area: row1;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.double_row_display {
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.double_col_display {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.grid_item {
+    padding: 5px;
+    text-align: left;
+}
