@@ -15,14 +15,11 @@
 .center {
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .right {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
   flex: 0;
 }
 

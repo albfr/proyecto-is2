@@ -5,9 +5,6 @@ import ActivityBoard from '@/components/perfil/ActivityBoard';
 import IndexStyles from "@/styles/Index.module.css";
 import ProfileLayoutStyles from "@/styles/perfil/ProfileLayout.module.css";
 
-<<<<<<< HEAD
-export default function Perfil() {
-=======
 import { getSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
@@ -38,7 +35,6 @@ export default function Perfil({ session }) {
     setIsModalOpen(false);
   };
 
->>>>>>> dev
   return (
     <>
       <div className={IndexStyles.screenWrapper}>
@@ -55,17 +51,3 @@ export default function Perfil({ session }) {
     </>
   );
 }
-<<<<<<< HEAD
-=======
-
-
-
-
-/*       <div className={Index.screenWrapper}>
-        <NavBar />
-      </div>
-      <div>
-        <ActivityBar />
-      </div>
-      */
->>>>>>> dev
