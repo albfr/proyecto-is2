@@ -1,13 +1,13 @@
 .activity_board {
-    height: 80vh;
-    width: auto;
+    height: 100%;
+    flex: 1;
     border: 1px solid rgb(211, 211, 211);
-    padding-left: 8rem;
-    padding-right: 8rem;
+    padding: 2rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem; 
+    gap: 0.5rem;
     justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
+    overflow-y: auto;
 }

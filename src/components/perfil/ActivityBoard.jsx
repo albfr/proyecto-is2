@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ActivityCard from "./ActivityCard";
 import styles from "@/styles/perfil/ActivityBoard.module.css";
+import ActivityBar from "./ActivityBar";
 import ActivityModification from "@/components/perfil/ActivityModification";
 import ProfileWrapper from "@/styles/perfil/ProfileWrapper.module.css";
 
@@ -50,6 +51,34 @@ export default function ActivityBoard() {
       visibility: 100,
       uv: 50,
     },
+    {
+      id: 3,
+      owner: "tocontreras2021",
+      name: "Faltar a clases",
+      max_temp: 50,
+      min_temp: -50,
+      wind: 0,
+      pressure: 0,
+      precipitation: 0,
+      humidity: 15,
+      cloud: true,
+      visibility: 100,
+      uv: 50,
+    },
+    {
+      id: 4,
+      owner: "tocontreras2021",
+      name: "Jugar Pokemon Verde Hoja",
+      max_temp: 25,
+      min_temp: 10,
+      wind: 0,
+      pressure: 0,
+      precipitation: 0,
+      humidity: 15,
+      cloud: true,
+      visibility: 100,
+      uv: 50,
+    },
   ];
 
   const openModal = (activity) => {
@@ -61,6 +90,7 @@ export default function ActivityBoard() {
   };
 
   return (
+  
     <div className={styles.activity_board}>
       {activities.map((activity) => (
         <ActivityCard

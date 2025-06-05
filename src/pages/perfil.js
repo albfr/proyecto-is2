@@ -1,11 +1,30 @@
 import React, { useState } from 'react';
 import NavBar from "@/components/NavBar";
-import ActivityModification from "@/components/perfil/ActivityModification";
-import Index from "@/styles/Index.module.css";
-import ProfileWrapper from "@/styles/perfil/ProfileWrapper.module.css";
+import ActivityBar from "@/components/perfil/ActivityBar";
 import ActivityBoard from '@/components/perfil/ActivityBoard';
+import IndexStyles from "@/styles/Index.module.css";
+import ProfileLayoutStyles from "@/styles/perfil/ProfileLayout.module.css";
 
-export default function Perfil() {
+import { getSession } from "next-auth/react";
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}
+
+export default function Perfil({ session }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -18,12 +37,17 @@ export default function Perfil() {
 
   return (
     <>
-      <div className={Index.screenWrapper}>
+      <div className={IndexStyles.screenWrapper}>
         <NavBar />
       </div>
-      <div>
-        <ActivityBoard/>
+
+      <div className={ProfileLayoutStyles.profileContainer}>
+        <ActivityBar />
+        <ActivityBoard />
       </div>
+
+      {
+      }
     </>
   );
 }

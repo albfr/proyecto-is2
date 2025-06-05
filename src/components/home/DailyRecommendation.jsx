@@ -25,11 +25,10 @@ function DailyRecommendation({ weekDayName, dayData }) {
   }
 
   const {
-    day: dateApiString,
+    date,
     maxtemp_c,
     mintemp_c,
     avghumidity,
-    feelsLike,
     avgtemp_c,
     uv,
     shadeFeelsLike,
@@ -66,7 +65,7 @@ function DailyRecommendation({ weekDayName, dayData }) {
         <div className={styles.data_grid}>
           <WeatherSummary
             day={weekDayName}
-            date={formatDate(dateApiString)}
+            date={formatDate(date)}
             maxTemp={maxtemp_c}
             minTemp={mintemp_c}
             humidity={avghumidity}
@@ -74,7 +73,7 @@ function DailyRecommendation({ weekDayName, dayData }) {
           <WeatherDetails
             feelsLike={Math.round((6.105*avghumidity/100)*(Math.exp(17.27*avgtemp_c/(237.7+avgtemp_c)))*100)/100}
             uvIndex={uv}
-            shadeFeelsLike={(Math.round((6.105*avghumidity/100)*(Math.exp(17.27*avgtemp_c/(237.7+avgtemp_c)))*100)/100)-2}
+            shadeFeelsLike={Math.round(((6.105*avghumidity/100)*(Math.exp(17.27*avgtemp_c/(237.7+avgtemp_c)))-2)*100)/100}
             windSpeed={maxwind_kph}
           />
         </div>
