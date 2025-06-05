@@ -1,5 +1,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 
+// This is how to get session info on a component
+
 export default function Home() {
   const { data: session } = useSession();
 

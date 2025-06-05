@@ -5,7 +5,26 @@ import ActivityModification from "@/components/perfil/ActivityModification";
 import Index from "@/styles/Index.module.css";
 import ProfileWrapper from "@/styles/ProfileWrapper.module.css";
 
-export default function Perfil() {
+import { getSession } from "next-auth/react";
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}
+
+export default function Perfil({ session }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
