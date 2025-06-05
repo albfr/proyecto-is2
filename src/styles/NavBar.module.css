@@ -15,6 +15,7 @@
 .center {
   flex: 1;
   display: flex;
+  transform: translate(65%, 0%);
 }
 
 .right {
