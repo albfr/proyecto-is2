@@ -2,8 +2,12 @@ import { getActivities, getActivitiesFromUser } from "@/lib/query/getActivities"
 
 export default async function handler(req, res) {
   try {
-    const example_user = "cano28";
-    const activities = await getActivitiesFromUser(example_user);
+    const email = req.query.email;
+    // const example_user = "cano28";
+    if (!email)
+      throw "No email provided";
+
+    const activities = await getActivitiesFromUser(email);
     let data = [];
     activities.map(a => {
       data.push({

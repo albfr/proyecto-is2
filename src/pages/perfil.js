@@ -6,8 +6,9 @@ import IndexStyles from "@/styles/Index.module.css";
 import ProfileLayoutStyles from "@/styles/perfil/ProfileLayout.module.css";
 
 import { getSession } from "next-auth/react";
+import { getActivitiesFromUser } from '@/lib/query/getActivities';
 
-export async function getServerSideProps(context) {
+export const getServerSideProps = ( async (context) => {
   const session = await getSession(context);
 
   if (!session) {
@@ -19,14 +20,18 @@ export async function getServerSideProps(context) {
     };
   }
 
-  return {
-    props: { session },
-  };
-}
+  const email = session.user.email;
+  const activities = await getActivitiesFromUser(email);
 
-export default function Perfil({ session }) {
+  return {
+    props: { session, activities }
+  };
+});
+
+export default function Perfil({ session, activities }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  console.log("PERFIL ACTIVITIES", session, activities);
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -43,11 +48,8 @@ export default function Perfil({ session }) {
 
       <div className={ProfileLayoutStyles.profileContainer}>
         <ActivityBar />
-        <ActivityBoard />
+        <ActivityBoard activities={activities}/>
       </div>
-
-      {
-      }
     </>
   );
 }
