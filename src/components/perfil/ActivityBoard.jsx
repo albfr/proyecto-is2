@@ -19,7 +19,7 @@ export default function ActivityBoard() {
       const res = await fetch(`http://localhost:3000/api/activities?email=${email}`);
       const data = await res.json();
       setActivities(data);
-      setError(null);    
+      setError(null);
     } catch(e) {
       console.error("Error al obtener actividades:", e);
       setError(e.message);
