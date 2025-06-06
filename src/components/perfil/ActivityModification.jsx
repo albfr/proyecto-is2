@@ -4,8 +4,10 @@ import styles from "@/styles/perfil/ActivityModification.module.css";
 //INTENTÉ PONER CADA TIPO DE USER INPUT EN DISTINTOS ARCHIVOS, PERO POR ALGUNA RAZÓN TODO EL CSS SE DESTRUIA T-T
 //Si quiere, el Cano me puede ayudar a Reactificar todo esto. Traté de que se viera lo más ordenado posible.
 
-function ActivityModification({ open, onClose }) {
+function ActivityModification({activity, open, onClose }) {
   if (!open) return null;
+  const [activityName, setActivityName] = useState(activity?.name || "");
+
   const handleSave = () => {
     console.log("Actividad guardada.");
     if (onClose) {
@@ -25,7 +27,7 @@ function ActivityModification({ open, onClose }) {
   };
 
   const uvScaleLabels = ["Bajo", "Moderado", "Alto", "Muy Alto"];
-  const [uvIndex, setUvIndex] = useState(0);
+  const [uvIndex, setUvIndex] = useState(activity?.uv_index || 0);
   const handleUvIndexChange = (event) => {
     setUvIndex(parseInt(event.target.value, 10));
   };
@@ -37,7 +39,7 @@ function ActivityModification({ open, onClose }) {
 
   return (
     <>
-      <div className={styles.overlay} />
+      <div className={styles.overlay} onClick={onClose} />
       <div className={styles.activity_menu}>
         <label className={styles.custom_field} htmlFor="activityName">
           <input
