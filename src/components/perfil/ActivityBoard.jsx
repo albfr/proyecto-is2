@@ -4,7 +4,7 @@ import styles from "@/styles/perfil/ActivityBoard.module.css";
 import ActivityModification from "@/components/perfil/ActivityModification";
 
 export default function ActivityBoard({ activities }) {
-  const [selectedActivity, setSelectedActivity] = useState(null);
+  //const [selectedActivity, setSelectedActivity] = useState(null);
 
   return (
     <div className={styles.activity_board}>

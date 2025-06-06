@@ -16,21 +16,6 @@ export const getServerSideProps = ( async (context) => {
       redirect: { destination: "/", permanent: false },
     };
   }
-<<<<<<< HEAD
-  return { props: { session } };
-}
-
-export default function Perfil({ session }) {
-  const [activeModal, setActiveModal] = useState(null);
-
-  const openCreateModal = () => {
-    setActiveModal('new');
-  };
-
-  const openEditModal = (activity) => {
-    setActiveModal(activity);
-=======
-
   const email = session.user.email;
   const activities = await getActivitiesFromUser(email);
 
@@ -40,12 +25,14 @@ export default function Perfil({ session }) {
 });
 
 export default function Perfil({ session, activities }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
 
-  console.log("PERFIL ACTIVITIES", session, activities);
-  const openModal = () => {
-    setIsModalOpen(true);
->>>>>>> dev
+  const openCreateModal = () => {
+    setActiveModal('new');
+  };
+
+  const openEditModal = (activity) => {
+    setActiveModal(activity);
   };
 
   const closeModal = () => {
@@ -60,8 +47,7 @@ export default function Perfil({ session, activities }) {
 
       <div className={ProfileLayoutStyles.profileContainer}>
         <ActivityBar />
-<<<<<<< HEAD
-        <ActivityBoard session={session} onCardClick={openEditModal} />
+        <ActivityBoard session={session} onCardClick={openEditModal} activities={activities}/>
       </div>
 
       {!activeModal && <AddButton onClick={openCreateModal} />}
@@ -71,10 +57,6 @@ export default function Perfil({ session, activities }) {
         onClose={closeModal} 
         activity={activeModal === 'new' ? null : activeModal}
       />
-=======
-        <ActivityBoard activities={activities}/>
-      </div>
->>>>>>> dev
     </>
   );
 }
