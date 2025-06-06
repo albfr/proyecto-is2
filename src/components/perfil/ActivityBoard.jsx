@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import ActivityCard from "./ActivityCard";
 import styles from "@/styles/perfil/ActivityBoard.module.css";
-import ActivityBar from "./ActivityBar";
-import ActivityModification from "@/components/perfil/ActivityModification";
-import ProfileWrapper from "@/styles/perfil/ProfileWrapper.module.css";
 
-export default function ActivityBoard() {
-  const [selectedActivity, setSelectedActivity] = useState(null);
-  
+// MODIFIED: We are now destructuring { onCardClick } from the props object.
+// This creates the `onCardClick` variable that was previously "not defined".
+export default function ActivityBoard({ onCardClick }) {
   const activities = [
+    // ... your activities array remains the same
     {
       id: 0,
       owner: "alferrada2021",
@@ -81,31 +79,15 @@ export default function ActivityBoard() {
     },
   ];
 
-  const openModal = (activity) => {
-    setSelectedActivity(activity);
-  };
-  
-  const closeModal = () => {
-    setSelectedActivity(null);
-  };
-
   return (
-  
     <div className={styles.activity_board}>
       {activities.map((activity) => (
         <ActivityCard
+          key={activity.id}
           activity={activity}
-          onClick={() => openModal(activity)}
+          onClick={() => onCardClick(activity)}
         />
       ))}
-
-      {selectedActivity && (
-        <ActivityModification
-          activity={selectedActivity}
-          open={true}
-          onClose={closeModal}
-        />
-      )}
     </div>
   );
 }
