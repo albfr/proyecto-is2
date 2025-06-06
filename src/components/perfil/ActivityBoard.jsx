@@ -3,7 +3,7 @@ import ActivityCard from "./ActivityCard";
 import styles from "@/styles/perfil/ActivityBoard.module.css";
 import ActivityModification from "@/components/perfil/ActivityModification";
 
-export default function ActivityBoard({ activities }) {
+export default function ActivityBoard({ onCardClick, activities }) {
   //const [selectedActivity, setSelectedActivity] = useState(null);
 
   return (
