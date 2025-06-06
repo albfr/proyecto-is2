@@ -4,10 +4,36 @@ import styles from "@/styles/perfil/ActivityBoard.module.css";
 import ActivityBar from "./ActivityBar";
 import ActivityModification from "@/components/perfil/ActivityModification";
 import ProfileWrapper from "@/styles/perfil/ProfileWrapper.module.css";
+import {useSession} from "next-auth/react";
 
 export default function ActivityBoard() {
+  const {data: session} = useSession();
   const [selectedActivity, setSelectedActivity] = useState(null);
-  
+  const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const obtenerActivities = async (email) => {
+    try {
+      setLoading(true);
+      const res = await fetch(`http://localhost:3000/api/activities?email=${email}`);
+      const data = await res.json();
+      setActivities(data);
+      setError(null);    
+    } catch(e) {
+      console.error("Error al obtener actividades:", e);
+      setError(e.message);
+      setActivities([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  if(!loading && !error) {
+    obtenerActivities("cano28")
+    console.log(loading, error);
+  }
+  console.log(activities);
+  /*
   const activities = [
     {
       id: 0,
@@ -80,7 +106,7 @@ export default function ActivityBoard() {
       uv: 50,
     },
   ];
-
+  */
   const openModal = (activity) => {
     setSelectedActivity(activity);
   };
