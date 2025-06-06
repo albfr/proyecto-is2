@@ -31,7 +31,6 @@ export const getServerSideProps = ( async (context) => {
 export default function Perfil({ session, activities }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log("PERFIL ACTIVITIES", session, activities);
   const openModal = () => {
     setIsModalOpen(true);
   };

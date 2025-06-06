@@ -14,6 +14,8 @@ export default async function handler(req, res) {
         id_activity: a.id_activity,
         name: a.name,
         temp: a.temperature,
+        max_temp: a.max_temperature,
+        min_temp: a.min_temperature,
         wind: a.wind,
         humidity: a.humidity,
         uv: a.uv
