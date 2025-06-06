@@ -7,14 +7,16 @@ import ProfileLayoutStyles from "@/styles/perfil/ProfileLayout.module.css";
 import AddButton from '@/components/perfil/AddButton';
 import ActivityModification from '@/components/perfil/ActivityModification';
 import { getSession } from "next-auth/react";
+import { getActivitiesFromUser } from '@/lib/query/getActivities';
 
-export async function getServerSideProps(context) {
+export const getServerSideProps = ( async (context) => {
   const session = await getSession(context);
   if (!session) {
     return {
       redirect: { destination: "/", permanent: false },
     };
   }
+<<<<<<< HEAD
   return { props: { session } };
 }
 
@@ -27,6 +29,23 @@ export default function Perfil({ session }) {
 
   const openEditModal = (activity) => {
     setActiveModal(activity);
+=======
+
+  const email = session.user.email;
+  const activities = await getActivitiesFromUser(email);
+
+  return {
+    props: { session, activities }
+  };
+});
+
+export default function Perfil({ session, activities }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  console.log("PERFIL ACTIVITIES", session, activities);
+  const openModal = () => {
+    setIsModalOpen(true);
+>>>>>>> dev
   };
 
   const closeModal = () => {
@@ -41,6 +60,7 @@ export default function Perfil({ session }) {
 
       <div className={ProfileLayoutStyles.profileContainer}>
         <ActivityBar />
+<<<<<<< HEAD
         <ActivityBoard session={session} onCardClick={openEditModal} />
       </div>
 
@@ -51,6 +71,10 @@ export default function Perfil({ session }) {
         onClose={closeModal} 
         activity={activeModal === 'new' ? null : activeModal}
       />
+=======
+        <ActivityBoard activities={activities}/>
+      </div>
+>>>>>>> dev
     </>
   );
 }
