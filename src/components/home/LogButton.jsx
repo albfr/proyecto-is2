@@ -9,7 +9,7 @@ export default function LogButton() {
     if (!session) {
         return (
           <div className={styles.githubButtonContainer}>
-            <button className={styles.githubButton} onClick={() => signIn("github")}>
+            <button className={styles.githubButton} onClick={() => signIn("github", { callbackUrl: "/api/addUser" })}>
               Sign in
             </button>
           </div>
