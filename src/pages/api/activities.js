@@ -3,6 +3,13 @@ import { getActivities, getActivitiesFromUser } from "@/lib/query/getActivities"
 export default async function handler(req, res) {
   try {
     const email = req.query.email;
+<<<<<<< HEAD
+=======
+    // const example_user = "cano28";
+    if (!email)
+      throw "No email provided";
+
+>>>>>>> frontend
     const activities = await getActivitiesFromUser(email);
     let data = [];
     activities.map(a => {
@@ -10,6 +17,8 @@ export default async function handler(req, res) {
         id_activity: a.id_activity,
         name: a.name,
         temp: a.temperature,
+        max_temp: a.max_temperature,
+        min_temp: a.min_temperature,
         wind: a.wind,
         humidity: a.humidity,
         uv: a.uv

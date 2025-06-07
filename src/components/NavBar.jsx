@@ -8,18 +8,20 @@ import { useSession } from "next-auth/react";
 
 function NavBar() {
   const router = useRouter();
-
   const { data: session } = useSession();
 
   const PerfilLoad = () => {
     router.push('/perfil');
   };
-    const MenuLoad = () => {
+  const MenuLoad = () => {
     router.push('/');
   };
 
+  const userImageSrc = session ? session.user.image : '/usuario.png';
+
   return (
     <div className={styles.navbar}>
+      <div className={styles.left}></div>
 
       <div className={styles.center}>
         <button className={styles.userButton} onClick={MenuLoad}>
@@ -27,22 +29,12 @@ function NavBar() {
         </button>
       </div>
 
-      <LogButton />
-
-      {!session &&
       <div className={styles.right}>
+        <LogButton />
         <button className={styles.userButton} onClick={PerfilLoad}>
-          <img src="/usuario.png" alt="User" className={styles.userImg} />
+          <img src={userImageSrc} alt="User" className={styles.userImg} />
         </button>
       </div>
-      }
-      {session &&
-      <div className={styles.right}>
-        <button className={styles.userButton} onClick={PerfilLoad}>
-          <img src={session.user.image} alt="User" className={styles.userImg} />
-        </button>
-      </div>
-      }
     </div>
   );
 }

@@ -12,6 +12,7 @@
     height: 500px;
     width: 400px;
     margin: 50px auto;
+    border: 3px solid #000000;
     border-radius: 10px;
     background-color: #a5a5a5;
     word-wrap: break-word;
