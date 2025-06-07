@@ -10,6 +10,7 @@ function ActivityRecommendation({ text, similarity }) {     //Receives recommend
         <p>
           {text || 'Recomendaciones de actividades basadas en usuarios + personalizaciones de usuario.'}
         </p>
+        <p>{Math.trunc(similarity*100*100)/100}%</p>
       </div>
     </li>
   );
