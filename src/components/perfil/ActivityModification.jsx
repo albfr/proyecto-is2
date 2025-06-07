@@ -1,40 +1,46 @@
 import React, { useState } from "react";
 import styles from "@/styles/perfil/ActivityModification.module.css";
 
+
 //INTENTÉ PONER CADA TIPO DE USER INPUT EN DISTINTOS ARCHIVOS, PERO POR ALGUNA RAZÓN TODO EL CSS SE DESTRUIA T-T
 //Si quiere, el Cano me puede ayudar a Reactificar todo esto. Traté de que se viera lo más ordenado posible.
 
-function ActivityModification({activity, open, onClose }) {
+function ActivityModification({ activity, open, onClose }) {
   if (!open) return null;
+
   const [activityName, setActivityName] = useState(activity?.name || "");
-
-  const handleSave = () => {
-    console.log("Actividad guardada.");
-    if (onClose) {
-      onClose();
-    }
-  };
-  const handleCancel = () => {
-    console.log("Actividad cancelada.");
-    if (onClose) {
-      onClose();
-    }
-  };
-
   const [humidityValue, setHumidityValue] = useState(50);
-  const handleHumidityChange = (event) => {
-    setHumidityValue(event.target.value);
-  };
+  const [uvIndex, setUvIndex] = useState(activity?.uv_index || 0);
+  const [windSpeed, setWindSpeed] = useState(0);
+  const [idealTemp, setIdealTemp] = useState(20);
 
   const uvScaleLabels = ["Bajo", "Moderado", "Alto", "Muy Alto"];
-  const [uvIndex, setUvIndex] = useState(activity?.uv_index || 0);
-  const handleUvIndexChange = (event) => {
-    setUvIndex(parseInt(event.target.value, 10));
-  };
 
-  const [windSpeed, setWindSpeed] = useState(0);
-  const handleWindSpeedChange = (event) => {
-    setWindSpeed(parseInt(event.target.value, 10));
+  const handleSave = async () => {
+  const params = new URLSearchParams({
+    name: activityName,
+    min_temp: parseFloat(idealTemp),
+    max_temp: parseFloat(idealTemp),
+    wind: windSpeed,
+    humidity: humidityValue,
+    uv: uvIndex,
+  });
+
+  try {
+    const res = await fetch(`/api/addActivity?${params.toString()}`);
+    if (!res.ok) throw new Error("Error al guardar la actividad");
+    const data = await res.json();
+    console.log("Actividad agregada:", data);
+    if (onClose) onClose();
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+
+  const handleCancel = () => {
+    console.log("Actividad cancelada.");
+    if (onClose) onClose();
   };
 
   return (
@@ -48,6 +54,8 @@ function ActivityModification({activity, open, onClose }) {
             name="activityName"
             required
             placeholder=" "
+            value={activityName}
+            onChange={(e) => setActivityName(e.target.value)}
           />
           <span className={styles.placeholder}> Nombre de la Actividad</span>
           <span className={styles.border} />
@@ -65,6 +73,8 @@ function ActivityModification({activity, open, onClose }) {
             placeholder=" "
             min="-50"
             max="50"
+            value={idealTemp}
+            onChange={(e) => setIdealTemp(e.target.value)}
           />
           <span className={styles.input_suffix}>ºC</span>
           <span className={styles.border} />
@@ -81,7 +91,7 @@ function ActivityModification({activity, open, onClose }) {
               min="0"
               max="100"
               value={humidityValue}
-              onChange={handleHumidityChange}
+              onChange={(e) => setHumidityValue(e.target.value)}
             />
             <progress min="0" max="100" value={humidityValue} />
           </div>
@@ -100,7 +110,7 @@ function ActivityModification({activity, open, onClose }) {
               max={uvScaleLabels.length - 1}
               step="1"
               value={uvIndex}
-              onChange={handleUvIndexChange}
+              onChange={(e) => setUvIndex(parseInt(e.target.value, 10))}
             />
             <progress min="0" max={uvScaleLabels.length - 1} value={uvIndex} />
           </div>
@@ -119,7 +129,7 @@ function ActivityModification({activity, open, onClose }) {
               max="50"
               step="5"
               value={windSpeed}
-              onChange={handleWindSpeedChange}
+              onChange={(e) => setWindSpeed(parseInt(e.target.value, 10))}
             />
             <progress min="0" max="50" step="5" value={windSpeed} />
           </div>
