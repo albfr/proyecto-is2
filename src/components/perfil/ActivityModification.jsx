@@ -32,6 +32,7 @@ function ActivityModification({ activity, open, onClose }) {
     const data = await res.json();
     console.log("Actividad agregada:", data);
     if (onClose) onClose();
+    window.location.reload();
   } catch (error) {
     console.error("Error:", error);
   }
