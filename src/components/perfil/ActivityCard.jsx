@@ -4,6 +4,8 @@ import styles from "@/styles/perfil/ActivityCard.module.css";
 
 export default function ActivityCard({ activity, onClick }) {
   const [hovered, setHovered] = useState(false);
+
+  console.log("HOLA", activity);
  
   useEffect(() => {
     document.body.style.cursor = hovered ? 'pointer' : 'auto'
@@ -19,7 +21,7 @@ export default function ActivityCard({ activity, onClick }) {
       
       <h3>{activity.name}</h3>
       <div className={styles.text}>
-        <p>Temperatura ideal: {(activity.min_temp + activity.max_temp) / 2}°C</p>
+        <p>Temperatura ideal: {(activity.min_temperature + activity.max_temperature) / 2}°C</p>
         <p>Humedad: {activity.humidity}%</p>
       </div>
     </div>
