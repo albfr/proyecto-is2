@@ -25,13 +25,13 @@ function DailyRecommendation({ weekDayName, dayData }) {
   }
 
   const {
+    condition: {icon},
     date,
     maxtemp_c,
     mintemp_c,
     avghumidity,
     avgtemp_c,
     uv,
-    shadeFeelsLike,
     maxwind_kph,
     recommendations
   } = dayData;
@@ -55,13 +55,12 @@ function DailyRecommendation({ weekDayName, dayData }) {
   }
 
   const healthTips = 'Mantente hidratado y usa protector solar. Considera las condiciones al planificar.';  //Placeholder
-  const imageSrc = "./sun.png"; //Placeholder
   const imageAlt = 'Representación del clima';
 
   return (
     <div className={styles.dailyRecWrapper}>
       <div className={styles.info_column}>
-        <WeatherImage src={imageSrc} alt={imageAlt} />
+        <WeatherImage src={icon} alt={imageAlt} />
         <div className={styles.data_grid}>
           <WeatherSummary
             day={weekDayName}
