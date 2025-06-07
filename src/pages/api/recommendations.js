@@ -1,12 +1,17 @@
 import { getForecastFromCity, getForecastFromLatLon } from "@/lib/query/getForecast";
 import { cosineSimilarity } from "@/lib/similarity";
-import { getActivities } from "@/lib/query/getActivities";
+import { getActivitiesFromUser } from "@/lib/query/getActivities";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+
 
 export default async function handler(req, res) {
   try {
     const lat = req.query.lat;
     const lon = req.query.lon;
     const city = req.query.city;
+    const session = await getServerSession(req, res, authOptions);
+    const email = session.user.email;
     let forecast;
     if (lat && lon)
       forecast = await getForecastFromLatLon(lat, lon);
@@ -16,7 +21,7 @@ export default async function handler(req, res) {
       throw 1;
 
     forecast = forecast.forecast.forecastday;
-    const activities = await getActivities();
+    const activities = await getActivitiesFromUser(email);
     if (!activities)
       throw new Error("an error has occured in connection with databse");
 
