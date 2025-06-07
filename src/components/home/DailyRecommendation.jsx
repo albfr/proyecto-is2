@@ -5,6 +5,7 @@ import WeatherDetails from './WeatherDetails';
 import HealthCareTips from './HealthcareTips';
 import ActivityRecommendation from './ActivityRecommendation';
 //import RecommendationPagination from './PaginationRecommendation';
+import { useSession } from "next-auth/react";
 
 import styles from '@/styles/home/DailyRecommendation.module.css';
 
@@ -23,6 +24,7 @@ function DailyRecommendation({ weekDayName, dayData }) {
   if (!dayData) {
     return <p>Cargando datos diarios...</p>;
   }
+  const {data:session} = useSession();
 
   const {
     date,
@@ -43,7 +45,7 @@ function DailyRecommendation({ weekDayName, dayData }) {
   let selectedRecommendations = recommendations.slice(0, Math.min(5, totalRecommendations));
 
   let activityRecommendations = [];
-  if (selectedRecommendations) {
+  if (selectedRecommendations && session) {
     activityRecommendations = selectedRecommendations.map(recommendation => {
       return(
         <ActivityRecommendation
@@ -81,9 +83,10 @@ function DailyRecommendation({ weekDayName, dayData }) {
       </div>
 
       <div className={styles.recommendation_column}>
-        <h1 className={styles.recommendation_title}>Actividades Recomendadas</h1>
-        {totalRecommendations > 0 && activityRecommendations}
-        {totalRecommendations == 0 && 
+        {session && <h1 className={styles.recommendation_title}>Actividades Recomendadas</h1>}
+        {!session && <h1 className={styles.recommendation_title}>Iniciar sesión para obtener recomendaciones</h1>}
+        {totalRecommendations > 0 && session && activityRecommendations}
+        {totalRecommendations == 0 && session &&
           <p>No existen recomendaciones disponibles en este momento!</p>
         }
       </div>
