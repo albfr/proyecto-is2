@@ -1,43 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/perfil/ActivityModification.module.css";
-
-
-//INTENTÉ PONER CADA TIPO DE USER INPUT EN DISTINTOS ARCHIVOS, PERO POR ALGUNA RAZÓN TODO EL CSS SE DESTRUIA T-T
-//Si quiere, el Cano me puede ayudar a Reactificar todo esto. Traté de que se viera lo más ordenado posible.
 
 function ActivityModification({ activity, open, onClose }) {
   if (!open) return null;
 
-  const [activityName, setActivityName] = useState(activity?.name || "");
+  const [activityId, setActivityId] = useState(null);
+  const [activityName, setActivityName] = useState("");
   const [humidityValue, setHumidityValue] = useState(50);
-  const [uvIndex, setUvIndex] = useState(activity?.uv_index || 0);
+  const [uvIndex, setUvIndex] = useState(0);
   const [windSpeed, setWindSpeed] = useState(0);
   const [idealTemp, setIdealTemp] = useState(20);
+
+
+useEffect(() => {
+  if (activity) {
+    setActivityId(activity.id_activity || null);
+    setActivityName(activity.name || "");
+    setHumidityValue(activity.humidity ?? 50);
+    setUvIndex(activity.uv_index ?? 0);
+    setWindSpeed(activity.wind ?? 0);
+    setIdealTemp(
+      activity.min_temp !== undefined && activity.max_temp !== undefined
+        ? (parseFloat(activity.min_temp) + parseFloat(activity.max_temp)) / 2
+        : 20
+    );
+    console.log("Actividad cargada en el formulario:", activity);
+  }
+}, [activity]);
 
   const uvScaleLabels = ["Bajo", "Moderado", "Alto", "Muy Alto"];
 
   const handleSave = async () => {
-  const params = new URLSearchParams({
-    name: activityName,
-    min_temp: parseFloat(idealTemp),
-    max_temp: parseFloat(idealTemp),
-    wind: windSpeed,
-    humidity: humidityValue,
-    uv: uvIndex,
-  });
 
-  try {
-    const res = await fetch(`/api/addActivity?${params.toString()}`);
-    if (!res.ok) throw new Error("Error al guardar la actividad");
-    const data = await res.json();
-    console.log("Actividad agregada:", data);
-    if (onClose) onClose();
-    window.location.reload();
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+    const params = new URLSearchParams({
+      id_activity: activityId,
+      name: activityName,
+      min_temp: parseFloat(idealTemp),
+      max_temp: parseFloat(idealTemp),
+      wind: windSpeed,
+      humidity: humidityValue,
+      uv: uvIndex,
+    });
 
+    try {
+      const res = await fetch(`/api/modifyActivity?${params.toString()}`);
+      console.log("ID de la actividad actual:", activityId);
+      console.log("Nombre de la actividad actual:", activity?.name);
+      if (!res.ok) throw new Error("Error al guardar la actividad");
+      const data = await res.json();
+      console.log("Actividad modificada:", data);
+      if (onClose) onClose();
+      window.location.reload();
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   const handleCancel = () => {
     console.log("Actividad cancelada.");
