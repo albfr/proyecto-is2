@@ -39,21 +39,22 @@ function DailyRecommendation({ weekDayName, dayData }) {
   } = dayData;
   const totalRecommendations = recommendations ? recommendations.length : 0;
 
-  recommendations.sort((a, b) => {
-    return(a.similarity < b.similarity);
-  })
-  let selectedRecommendations = recommendations.slice(0, Math.min(5, totalRecommendations));
+  recommendations.sort((a, b) => b.similarity - a.similarity);
+
+  // Filtrar solo las recomendaciones con similitud mayor a 70%
+  const filteredRecommendations = recommendations.filter(rec => rec.similarity * 100 > 30);
+
+  // Tomar hasta 5 recomendaciones filtradas
+  const selectedRecommendations = filteredRecommendations.slice(0, 5);
 
   let activityRecommendations = [];
-  if (selectedRecommendations && session) {
-    activityRecommendations = selectedRecommendations.map(recommendation => {
-      return(
-        <ActivityRecommendation
-          text={recommendation.name}
-          similarity={recommendation.similarity}
-        />
-      )
-    })
+  if (selectedRecommendations.length > 0 && session) {
+    activityRecommendations = selectedRecommendations.map(recommendation => (
+      <ActivityRecommendation 
+        text={recommendation.name}
+        similarity={recommendation.similarity}
+      />
+    ));
   }
 
   const healthTips = 'Mantente hidratado y usa protector solar. Considera las condiciones al planificar.';  //Placeholder
