@@ -1,18 +1,7 @@
 import Head from "next/head";
-//import { Geist, Geist_Mono } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import RecommendationWrapper from "@/components/home/RecommendationWrapper";
 import styles from "@/styles/Index.module.css";
-
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 export default function Home() {
   return (
@@ -23,20 +12,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <div
-        className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
-      > */}
-      <div className={styles.screenWrapper}>
-        <NavBar></NavBar>
-        {/* <main className={styles.main}> */}
-        <div styles="1px solid red">
-          <RecommendationWrapper></RecommendationWrapper>
-        </div>
+
+      <div className={styles.pageContainer}>
+        <NavBar />
+        <RecommendationWrapper />
       </div>
-      {/* </main> */}
-      {/* <footer className={styles.footer}>
-      </footer> */}
-      {/* </div> */}
     </>
   );
 }

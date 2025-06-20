@@ -10,7 +10,7 @@ function ActivityModification({ activity, open, onClose }) {
   const [uvIndex, setUvIndex] = useState(0);
   const [windSpeed, setWindSpeed] = useState(0);
   const [idealTemp, setIdealTemp] = useState(20);
-
+  const [selectedWeather, setSelectedWeather] = useState(null);
 
 useEffect(() => {
   if (activity) {
@@ -19,6 +19,7 @@ useEffect(() => {
     setHumidityValue(activity.humidity ?? 50);
     setUvIndex(activity.uv_index ?? 0);
     setWindSpeed(activity.wind ?? 0);
+    setSelectedWeather(null);
     setIdealTemp(
       activity.min_temp !== undefined && activity.max_temp !== undefined
         ? (parseFloat(activity.min_temp) + parseFloat(activity.max_temp)) / 2
@@ -153,6 +154,42 @@ useEffect(() => {
           </div>
           <div className={styles.sliderValue}>{windSpeed} km/h</div>
         </label>
+
+        <div className={styles.grid_item_2}>
+          <b>Preferencia de Clima (Opcional)</b>
+        </div>
+        <div className={styles.weather_options_container}>
+
+          <div className={styles.weather_option}>
+            <label className={styles.weather_option_label}>Soleado</label>
+            <button
+              className={`${styles.weather_button} ${selectedWeather === 'sunny' ? styles.selected : ''}`}
+              onClick={() => setSelectedWeather('sunny')}
+            >
+              ☀️
+            </button>
+          </div>
+
+          <div className={styles.weather_option}>
+            <label className={styles.weather_option_label}>Lluvia</label>
+            <button
+              className={`${styles.weather_button} ${selectedWeather === 'rain' ? styles.selected : ''}`}
+              onClick={() => setSelectedWeather('rain')}
+            >
+              🌧️
+            </button>
+          </div>
+
+          <div className={styles.weather_option}>
+            <label className={styles.weather_option_label}>Nieve</label>
+            <button
+              className={`${styles.weather_button} ${selectedWeather === 'snow' ? styles.selected : ''}`}
+              onClick={() => setSelectedWeather('snow')}
+            >
+              ❄️
+            </button>
+          </div>
+        </div>
 
         <div className={styles.double_col_display}>
           <button className={styles.button} onClick={handleCancel}>

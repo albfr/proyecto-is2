@@ -1,23 +1,17 @@
 .day_date_temp_hum {
-    grid-area: row1;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
     align-items: center;
 }
 
-.double_row_display {
-    display: grid;
-    grid-template-rows: auto auto;
+.dataBox {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 0.5rem 0.75rem; 
+  border-radius: 8px; 
+  background-color: rgba(0, 0, 0, 0.2); 
+  text-align: center;
+  white-space: nowrap; 
 }
 
-.double_col_display {
-    display: grid;
-    grid-template-columns: auto auto;
-}
-
-.grid_item {
-    padding: 5px;
-    text-align: left;
-}
