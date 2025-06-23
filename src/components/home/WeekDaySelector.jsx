@@ -2,7 +2,7 @@ import React from 'react';
 import DayButton from './DayButton';
 import styles from '@/styles/home/WeekDaySelector.module.css';
 
-const DAYS_OF_WEEK = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+const DAYS_OF_WEEK = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
 function WeekdaySelector({ selectedDay, onDayChange }) {
   const currentDay = new Date();

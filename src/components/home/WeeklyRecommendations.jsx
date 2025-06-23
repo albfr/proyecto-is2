@@ -55,9 +55,9 @@ function WeeklyRecommendations({ recs }) {
 
   return (
     <div className={styles.weekly_wrapper}>
-      <p>
+      {/*<p>
         Selected Day: <strong>{currentDayName || 'None'}</strong>
-      </p>
+      </p>*/}
       <WeekdaySelector selectedDay={currentDayName} onDayChange={handleDayChange} />
 
       {selectedDayData ? (

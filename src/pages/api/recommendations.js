@@ -11,7 +11,12 @@ export default async function handler(req, res) {
     const lon = req.query.lon;
     const city = req.query.city;
     const session = await getServerSession(req, res, authOptions);
-    const email = session.user.email;
+    // ESTE IF ESTA MAL Y ES UN PARCHE
+    let email;
+    if (!session)
+      email = "josantis2021@udec.cl";
+    else
+      email = session.user.email;
     let forecast;
     if (lat && lon)
       forecast = await getForecastFromLatLon(lat, lon);
