@@ -10,11 +10,26 @@ export default function ActivityCard({ activity, onClick }) {
   }, [hovered]);
   */
 
-  const handleDelete = (event) => {
-    event.stopPropagation();
-    
-    console.log(`Eliminar actividad: ${activity.name}`);
-  };
+const handleDelete = async (event) => {
+  event.stopPropagation();
+
+  try {
+    const res = await fetch(`/api/deleteActivity?id_activity=${activity.id_activity}`, {
+      method: 'DELETE',
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("Respuesta del servidor:", errorText);
+      throw new Error("Error al eliminar la actividad");
+    }
+
+    window.location.reload();
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 
   return (
     <div 
@@ -24,7 +39,7 @@ export default function ActivityCard({ activity, onClick }) {
       onClick={onClick}
     >
   
-      <button className={styles.button} onClick={handleDelete}>
+      <button className={styles.button} onClick={(e) => handleDelete(e)}>
         x
       </button>
 
