@@ -148,7 +148,7 @@
 .input_suffix {
   position: absolute;
   top: 50%;
-  right: 12px; 
+  right: 325px; 
   transform: translateY(-50%);
   color: #888;
   pointer-events: none;
