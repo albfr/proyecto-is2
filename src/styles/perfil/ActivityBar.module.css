@@ -12,7 +12,7 @@
 }
 
 .barButton {
-  width: calc(100% - 10px); /* Ajustar */
+  width: calc(100% - 20px);
   max-width: 240px;
   height: 60px;
   margin: 5px;
@@ -20,8 +20,77 @@
   border: 1px solid #000000;
   cursor: pointer;
   font-size: 1.2rem;
+  border-radius: 8px;
 }
 
 .barButton:hover {
-  background-color: #9f9f9f;
+  background-color: #d0d0d0;
+}
+
+.notificationSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 50px;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.text {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.notifContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.toggleLabel {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #555;
+  margin: 0;
+}
+
+.notifButton {
+  background-color: #ccc;
+  width: 50px;
+  height: 28px;
+  border-radius: 14px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.notifButton::before {
+  position: absolute;
+  content: '';
+  background-color: #fff;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  margin: 3px;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .notifButton {
+  background-color: #4CAF50;
+}
+
+input:checked + .notifButton::before {
+  transform: translateX(22px);
+}
+
+.hiddenCheckbox {
+  display: none;
 }

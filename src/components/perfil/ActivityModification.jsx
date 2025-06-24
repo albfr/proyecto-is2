@@ -10,7 +10,7 @@ function ActivityModification({ activity, open, onClose }) {
   const [uvIndex, setUvIndex] = useState(0);
   const [windSpeed, setWindSpeed] = useState(0);
   const [idealTemp, setIdealTemp] = useState(20);
-  const [selectedWeather, setSelectedWeather] = useState(null);
+  const [selectedWeather, setSelectedWeather] = useState([]);
 
 useEffect(() => {
   if (activity) {
@@ -19,7 +19,7 @@ useEffect(() => {
     setHumidityValue(activity.humidity ?? 50);
     setUvIndex(activity.uv_index ?? 0);
     setWindSpeed(activity.wind ?? 0);
-    setSelectedWeather(null);
+    setSelectedWeather([]);
     setIdealTemp(
       activity.min_temp !== undefined && activity.max_temp !== undefined
         ? (parseFloat(activity.min_temp) + parseFloat(activity.max_temp)) / 2
@@ -31,8 +31,17 @@ useEffect(() => {
 
   const uvScaleLabels = ["Bajo", "Moderado", "Alto", "Muy Alto"];
 
+  const handleWeatherToggle = (weatherType) => {
+    setSelectedWeather((prevSelected) => {  //If the weather type is already selected, remove it.
+      if (prevSelected.includes(weatherType)) {
+        return prevSelected.filter((item) => item !== weatherType);
+      } else {                              //Otherwise, add it to the array of selected weather types.
+        return [...prevSelected, weatherType];
+      }
+    });
+  };
+  
   const handleSave = async () => {
-
     const params = new URLSearchParams({
       id_activity: activityId,
       name: activityName,
@@ -42,6 +51,10 @@ useEffect(() => {
       humidity: humidityValue,
       uv: uvIndex,
     });
+
+    if (selectedWeather.length > 0) {   //Send the array to the API (not necessary if we're not going to use this, but my TOC was urging me to add this functionality. I'm sorry.)
+        params.append('weather_preferences', selectedWeather.join(','));
+    }
 
     try {
       const res = await fetch(`/api/modifyActivity?${params.toString()}`);
@@ -159,12 +172,11 @@ useEffect(() => {
           <b>Preferencia de Clima (Opcional)</b>
         </div>
         <div className={styles.weather_options_container}>
-
           <div className={styles.weather_option}>
             <label className={styles.weather_option_label}>Soleado</label>
             <button
-              className={`${styles.weather_button} ${selectedWeather === 'sunny' ? styles.selected : ''}`}
-              onClick={() => setSelectedWeather('sunny')}
+              className={`${styles.weather_button} ${selectedWeather.includes("sunny") ? styles.selected: ""}`}
+              onClick={() => handleWeatherToggle("sunny")}
             >
               ☀️
             </button>
@@ -173,8 +185,8 @@ useEffect(() => {
           <div className={styles.weather_option}>
             <label className={styles.weather_option_label}>Lluvia</label>
             <button
-              className={`${styles.weather_button} ${selectedWeather === 'rain' ? styles.selected : ''}`}
-              onClick={() => setSelectedWeather('rain')}
+              className={`${styles.weather_button} ${selectedWeather.includes("rain") ? styles.selected : ''}`}
+              onClick={() => handleWeatherToggle("rain")}
             >
               🌧️
             </button>
@@ -183,8 +195,8 @@ useEffect(() => {
           <div className={styles.weather_option}>
             <label className={styles.weather_option_label}>Nieve</label>
             <button
-              className={`${styles.weather_button} ${selectedWeather === 'snow' ? styles.selected : ''}`}
-              onClick={() => setSelectedWeather('snow')}
+              className={`${styles.weather_button} ${selectedWeather.includes("snow") ? styles.selected : ''}`}
+              onClick={() => handleWeatherToggle("snow")}
             >
               ❄️
             </button>
