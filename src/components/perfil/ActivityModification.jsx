@@ -4,6 +4,8 @@ import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined';
 import AcUnitOutlinedIcon from '@mui/icons-material/AcUnitOutlined';
 
+//Cano por qué me mientes? :(
+
 function ActivityModification({ activity, open, onClose }) {
   if (!open) return null;
   const [activityId, setActivityId] = useState(null);
