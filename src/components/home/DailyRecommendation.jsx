@@ -42,7 +42,7 @@ function DailyRecommendation({ weekDayName, dayData }) {
   recommendations.sort((a, b) => b.similarity - a.similarity);
 
   // Filtrar solo las recomendaciones con similitud mayor a 70%
-  const filteredRecommendations = recommendations.filter(rec => rec.similarity * 100 > 30);
+  const filteredRecommendations = recommendations.filter(rec => rec.similarity * 100 > 70);
 
   // Tomar hasta 5 recomendaciones filtradas
   const selectedRecommendations = filteredRecommendations.slice(0, 5);
