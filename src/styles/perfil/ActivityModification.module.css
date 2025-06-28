@@ -148,11 +148,29 @@
 .input_suffix {
   position: absolute;
   top: 50%;
-  right: 325px; 
+  right: 130px;
   transform: translateY(-50%);
   color: #888;
   pointer-events: none;
   font-size: inherit;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.animatedField input:focus + .input_suffix,
+.animatedField input:not(:placeholder-shown) + .input_suffix {
+  opacity: 1;
+}
+
+.tempParameters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem; 
+}
+
+.tempParameters > .animatedField {
+  width: 48%;
 }
 
 .formRow {

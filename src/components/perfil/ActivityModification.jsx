@@ -4,7 +4,7 @@ import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined';
 import AcUnitOutlinedIcon from '@mui/icons-material/AcUnitOutlined';
 
-//Cano por qué me mientes? :(
+//Cano por qué me mientes? :( // LOL
 
 function ActivityModification({ activity, open, onClose }) {
   if (!open) return null;
@@ -13,7 +13,8 @@ function ActivityModification({ activity, open, onClose }) {
   const [humidityValue, setHumidityValue] = useState(50);
   const [uvIndex, setUvIndex] = useState(0);
   const [windSpeed, setWindSpeed] = useState(0);
-  const [idealTemp, setIdealTemp] = useState(20);
+  const [minTemp, setMinTemp] = useState(20);
+  const [maxTemp, setMaxTemp] = useState(20);
   const [selectedWeather, setSelectedWeather] = useState([]);
 
   useEffect(() => {
@@ -24,11 +25,8 @@ function ActivityModification({ activity, open, onClose }) {
       setUvIndex(activity.uv_index ?? 0);
       setWindSpeed(activity.wind ?? 0);
       setSelectedWeather([]);
-      setIdealTemp(
-        activity.min_temp !== undefined && activity.max_temp !== undefined
-          ? (parseFloat(activity.min_temp) + parseFloat(activity.max_temp)) / 2
-          : 20
-      );
+      setMinTemp(activity.min_temp ?? 20);
+      setMaxTemp(activity.max_temp ?? 20);
     }
   }, [activity]);
 
@@ -48,8 +46,8 @@ function ActivityModification({ activity, open, onClose }) {
     const params = new URLSearchParams({
       id_activity: activityId,
       name: activityName,
-      min_temp: parseFloat(idealTemp),
-      max_temp: parseFloat(idealTemp),
+      min_temp: parseFloat(minTemp),
+      max_temp: parseFloat(maxTemp),
       wind: windSpeed,
       humidity: humidityValue,
       uv: uvIndex,
@@ -81,12 +79,23 @@ function ActivityModification({ activity, open, onClose }) {
           <span className={styles.placeholder}>Nombre de la Actividad</span>
           <span className={styles.border} />
         </label>
-        <label className={styles.animatedField} htmlFor="idealTemp">
-          <input type="number" id="idealTemp" name="idealTemp" required placeholder=" " min="-50" max="50" value={idealTemp} onChange={(e) => setIdealTemp(e.target.value)} />
-          <span className={styles.input_suffix}>ºC</span>
-          <span className={styles.placeholder}>Temperatura Ideal</span>
-          <span className={styles.border} />
-        </label>
+
+        <div className={styles.tempParameters}>
+          <label className={styles.animatedField} htmlFor="minTemp">
+            <input type="number" id="minTemp" name="minTemp" required placeholder=" " min="-50" max="50" value={minTemp} onChange={(e) => setMinTemp(e.target.value)} />
+            <span className={styles.input_suffix}>ºC</span>
+            <span className={styles.placeholder}>Temperatura Mínima</span>
+            <span className={styles.border} />
+          </label>
+
+          <label className={styles.animatedField} htmlFor="maxTemp">
+            <input type="number" id="maxTemp" name="maxTemp" required placeholder=" " min="-50" max="50" value={maxTemp} onChange={(e) => setMaxTemp(e.target.value)} />
+            <span className={styles.input_suffix}>ºC</span>
+            <span className={styles.placeholder}>Temperatura Máxima</span>
+            <span className={styles.border} />
+          </label>
+        </div>
+
         <div className={styles.formRow}>
           <label className={styles.fieldLabel} htmlFor="idealHumidity">Humedad (Opcional)</label>
           <div className={styles.sliderContainer}>
