@@ -19,14 +19,23 @@ function ActivityModification({ activity, open, onClose }) {
 
   useEffect(() => {
     if (activity) {
+      console.log("Cargando actividad:", activity);
+      console.log("Id actividad " + activity.id_activity);
+      console.log("Name actividad " + activity.name);
+      console.log("Humedad actividad " + activity.humidity);
+      console.log("UV actividad " + activity.uv);
+      console.log("Viento actividad " + activity.wind);
+      console.log("Weather actividad " + selectedWeather);
+      console.log("T minima actividad " + activity.min_temperature);
+      console.log("T max actividad " + activity.max_temperature);
       setActivityId(activity.id_activity || null);
       setActivityName(activity.name || "");
       setHumidityValue(activity.humidity ?? 50);
-      setUvIndex(activity.uv_index ?? 0);
+      setUvIndex(activity.uv);
       setWindSpeed(activity.wind ?? 0);
       setSelectedWeather([]);
-      setMinTemp(activity.min_temp ?? 20);
-      setMaxTemp(activity.max_temp ?? 20);
+      setMinTemp(activity.min_temperature);
+      setMaxTemp(activity.max_temperature);
     }
   }, [activity]);
 

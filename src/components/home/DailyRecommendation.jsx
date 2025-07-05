@@ -35,14 +35,15 @@ function DailyRecommendation({ weekDayName, dayData }) {
     avgtemp_c,
     uv,
     maxwind_kph,
-    recommendations
+    recommendations,
+    daily_will_it_rain,
   } = dayData;
   const totalRecommendations = recommendations ? recommendations.length : 0;
 
   recommendations.sort((a, b) => b.similarity - a.similarity);
 
   // Filtrar solo las recomendaciones con similitud mayor a 70%
-  const filteredRecommendations = recommendations.filter(rec => rec.similarity * 100 > 30);
+  const filteredRecommendations = recommendations.filter(rec => rec.similarity * 100 > 70);
 
   // Tomar hasta 5 recomendaciones filtradas
   const selectedRecommendations = filteredRecommendations.slice(0, 5);
@@ -56,8 +57,26 @@ function DailyRecommendation({ weekDayName, dayData }) {
       />
     ));
   }
-
-  const healthTips = 'Mantente hidratado y usa protector solar. Considera las condiciones al planificar.';  //Placeholder
+  var healthTips;
+  console.log(uv);
+  if(avgtemp_c <= 0) {
+    healthTips = "La temperatura es muy baja. Viste en capas y camina con precaución para evitar caídas."
+  }
+  else if (daily_will_it_rain) {
+    healthTips = "Se esperan lluvias. Lleva paraguas o impermeable y usa calzado adecuado."; 
+  }
+  else if(avgtemp_c >= 35) {
+    healthTips = "Temperatura muy alta. Evita el ejercicio intenso y mantente hidratado."
+  }
+  else if(uv >= 2) {
+    healthTips = "Índice UV alto. Utiliza protector solar y evita la exposición directa al sol."
+  }
+  else if(maxwind_kph > 40) {
+    healthTips = "Vientos fuertes. Evita salir si no es necesario."
+  }
+  else {
+    healthTips = 'Mantente hidratado y usa protector solar. Considera las condiciones al planificar.';  //Placeholder
+  }
   const imageAlt = 'Representación del clima';
 
   return (
