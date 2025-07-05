@@ -94,3 +94,35 @@ input:checked + .notifButton::before {
 .hiddenCheckbox {
   display: none;
 }
+
+.locationInputContainer {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.locationInput {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 80%;
+  font-size: 1rem;
+}
+
+.submitButton {
+  margin-top: 12px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.submitButton:hover {
+  background-color: #0056b3; 
+}
