@@ -1,7 +1,7 @@
 
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import updatePreferences from "@/pages/api/updatePreferences";
+import updatePreferences from "@/lib/query/updatePreferences";
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
