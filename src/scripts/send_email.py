@@ -57,3 +57,6 @@ def send_email():
                 msg.attach(MIMEText(rec))
 
             email_server.sendmail(FROM_ADDRESS, email, msg.as_string())
+
+if __name__ == "__main__":
+    send_email()
