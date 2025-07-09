@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     // ESTE IF ESTA MAL Y ES UN PARCHE
     let email;
     if (!session)
-      email = "josantis2021@udec.cl";
+      email = req.query.email; // parche del parche, para poder llamar de forma insegura desde py
     else
       email = session.user.email;
     let forecast;

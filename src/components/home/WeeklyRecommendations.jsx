@@ -4,7 +4,7 @@ import WeekdaySelector from './WeekDaySelector';
 
 import styles from '@/styles/home/WeeklyRecommendation.module.css';
 
-const DAYS_OF_WEEK = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+const DAYS_OF_WEEK = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
 const getDayNameFromDate = (dateString) => {
   const date = new Date(dateString + 'T00:00:00');
@@ -55,9 +55,9 @@ function WeeklyRecommendations({ recs }) {
 
   return (
     <div className={styles.weekly_wrapper}>
-      <p>
+      {/*<p>
         Selected Day: <strong>{currentDayName || 'None'}</strong>
-      </p>
+      </p>*/}
       <WeekdaySelector selectedDay={currentDayName} onDayChange={handleDayChange} />
 
       {selectedDayData ? (

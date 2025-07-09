@@ -8,6 +8,8 @@ export default function RecommendationWrapper() {
   const [recommendationsData, setRecommendationsData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [city, setCity] = useState(null);
+  const [countryName, setCountry] = useState(null);
 
   const obtenerRecomendaciones = async (lat, lon) => {
     try {
@@ -15,7 +17,17 @@ export default function RecommendationWrapper() {
       const res = await fetch(`/api/recommendations?lat=${lat}&lon=${lon}`);
       const data = await res.json();
       setRecommendationsData(data);
-      console.log(data);
+
+      const geoRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=es`);
+      const geoData = await geoRes.json();
+      console.log("Reverse geocoding data:", geoData.city);
+      console.log("Reverse geocoding data:", geoData.countryName);
+
+      setCity(geoData.city);
+      setCountry(geoData.countryName);
+
+      console.log(geoData);
+      //console.log(data[1]);
       setError(null);
     } catch (e) {
       console.error("Error al obtener recomendaciones:", e);
@@ -32,6 +44,12 @@ export default function RecommendationWrapper() {
         <AutomaticLocation onCoordsReady={obtenerRecomendaciones} />
         <ManualLocation onCoordsReady={obtenerRecomendaciones} />
       </div>
+
+      {city && countryName && (
+        <div className={styles.city_display}>
+          <span style={{ fontWeight: 'bold' }}>Ciudad:</span> {city}, {countryName}
+        </div>
+      )}
 
       {loading && <p>Cargando recomendaciones...</p>}
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
